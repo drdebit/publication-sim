@@ -232,7 +232,7 @@ We vary the following parameters:
 For each parameter combination, we run 20 independent replications and
 report averaged results for stability.
 
-The simulation code is implemented in Clojure and is available at
+The simulation code is implemented in Clojure and is publicly available at
 https://github.com/drdebit/publication-sim for replication and extension.
 
 ** Baseline Parameters
