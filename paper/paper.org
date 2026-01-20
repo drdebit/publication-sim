@@ -232,6 +232,50 @@ The peer review system thus perpetuates itself: new faculty adopt safe
 strategies, become reviewers who favor similar work, and train the next
 generation to do the same.
 
+** Institutional Context: Accounting Journal Review Practices
+
+Understanding the institutional structure of accounting journal review is
+essential for calibrating our simulation and interpreting its implications.
+The top accounting journals---The Accounting Review (TAR), Journal of
+Accounting Research (JAR), and Journal of Accounting and Economics
+(JAE)---differ meaningfully in their review processes, and all differ from
+journals in other disciplines.
+
+A striking feature of accounting is the small number of reviewers. TAR
+typically uses two reviewers per submission, while JAR and JAE often use
+just one. This stands in contrast to natural sciences, where three or more
+reviewers is common, and to the medical sciences, where major journals
+routinely use three to five reviewers. cite:woodComparingPublicationProcess2016
+documented that accounting journals have longer times to publication than
+comparable journals in economics, finance, management, and psychology,
+despite using fewer reviewers.
+
+The single-reviewer model at JAR and JAE is particularly consequential for
+our analysis. With one reviewer, there is no averaging of assessments to
+reduce noise---the single reviewer's noisy signal determines the paper's
+fate. JAR and JAE incentivize fast turnaround by paying referees for reviews
+completed within four weeks, which may improve speed but does nothing to
+address reliability. The result is a system optimized for efficiency rather
+than accuracy.
+
+Desk rejection practices also vary across journals. TAR desk rejects
+approximately 5% of submissions, while JAR's desk rejection rate is
+approximately 15%. Papers that survive desk rejection face the full review
+process, but the low desk rejection rates mean that reviewer resources are
+spread across a large pool of submissions. JAR charges substantial
+submission fees (currently \$750 for authors from top-tier institutions),
+which may deter some submissions but does not address the fundamental
+reliability problem.
+
+The institutional structure of accounting review thus creates conditions
+where low inter-rater reliability has maximum impact. With only one or two
+reviewers, there is limited opportunity for noise to average out. With high
+submission volumes and pressure for fast turnaround, there is limited
+opportunity for careful deliberation. The simulation results we present
+below should be interpreted against this institutional backdrop: accounting
+journals operate with fewer reviewers than most disciplines, making them
+particularly vulnerable to the measurement error problems we document.
+
 ** Interventions and Training
 
 A natural question is whether peer review can be improved through training
