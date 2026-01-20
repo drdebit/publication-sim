@@ -5,7 +5,8 @@
 #+LATEX_CLASS: article
 #+LATEX_CLASS_OPTIONS: [12pt]
 #+LATEX_HEADER: \usepackage{amsmath,amssymb}
-#+LATEX_HEADER: \usepackage{natbib}
+#+LATEX_HEADER: \usepackage[style=authoryear,natbib=true,backend=biber]{biblatex}
+#+LATEX_HEADER: \addbibresource{~/Dropbox/BibLaTeX/library.bib}
 #+LATEX_HEADER: \usepackage{graphicx}
 #+LATEX_HEADER: \usepackage{booktabs}
 #+LATEX_HEADER: \usepackage[margin=1in]{geometry}
@@ -578,5 +579,4 @@ knowledge production systems.
 :UNNUMBERED: t
 :END:
 
-bibliographystyle:apalike
-bibliography:~/Dropbox/BibLaTeX/library.bib
+#+LATEX: \printbibliography[heading=none]
