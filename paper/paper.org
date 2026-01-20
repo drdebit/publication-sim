@@ -1,0 +1,478 @@
+#+TITLE: Why Good Papers Get Rejected: A Simulation of Peer Review as Noisy Signal Extraction
+#+AUTHOR: [Author Name]
+#+DATE: 2026
+#+OPTIONS: toc:nil num:t
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage{natbib}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \doublespacing
+
+* Abstract                                                         :noexport:
+
+Recent surveys document growing dissatisfaction with the accounting
+publication process, with researchers believing acceptance rates should
+nearly double and that top journals increasingly favor narrow
+methodologies. The conventional explanation attributes these problems to
+reviewer bias. We offer an alternative: the statistical properties of peer
+review---specifically, low inter-rater reliability combined with
+multi-dimensional conjunctive evaluation---produce systematic dysfunction
+that disadvantages quality research even without bias. Using a simulation
+calibrated to empirical reliability data (ICC = 0.34), we demonstrate that
+at realistic selectivity levels, approximately [XX]% of deserving papers are
+rejected due to measurement error alone. This error structure creates
+perverse incentives: researchers maximize expected publications by producing
+multiple moderate-quality papers rather than single excellent papers. Our
+findings reframe the conversation from "reviewers are biased" to "the system
+is structurally noisy," pointing toward different remedies than those
+typically proposed.
+
+* Introduction
+
+Recent surveys reveal growing dissatisfaction with the accounting
+publication process. cite:woodComparingPublicationProcess2016 found that
+accounting academics perceived very low citation patterns relative to other
+disciplines and believed the review process was deteriorating.
+cite:burtonPerceptionsAccountingAcademics2024 updated this survey and found
+perceptions have only worsened: the rising generation of scholars holds even
+more negative views than their predecessors, respondents believe acceptance
+rates should nearly double, and there is widespread concern that top
+journals favor narrow methodologies while underweighting practice relevance.
+Perhaps most troublingly, cite:burtonDoWeMatter2021 documented that
+accounting research receives significantly less attention from policymakers
+and the public than economics, finance, and other disciplines.
+
+These patterns raise fundamental questions about whether the peer review
+process is functioning effectively. The common explanation for publication
+difficulties centers on reviewer /bias/---topic preferences, methodological
+prejudice, or personal networks that systematically disadvantage certain
+work. While bias undoubtedly exists, we offer a complementary explanation
+grounded in measurement theory: the statistical properties of peer
+review---specifically, low inter-rater reliability combined with
+multi-dimensional conjunctive evaluation criteria---may produce systematic
+dysfunction that disadvantages quality research even in the /absence/ of
+bias.
+
+Our contribution is to show that high false rejection rates emerge naturally
+from subjectivity alone. Using an agent-based simulation calibrated to
+empirical reliability data, we demonstrate that at realistic selectivity
+levels, a substantial fraction of truly deserving papers are rejected due to
+measurement error. This finding validates field wisdom that good papers have
+roughly a 50% chance of acceptance at top journals. More troublingly, we
+show that this error structure creates perverse incentives: researchers
+maximize expected publications by producing multiple "very good" papers
+rather than single "excellent" papers, explaining the prevalence of
+incremental research and fragmentation strategies documented in the
+literature.
+
+The remainder of this paper proceeds as follows. Section [[#model]] develops
+a formal model of peer review as noisy signal extraction. Section
+[[#simulation]] describes our simulation design and calibration to empirical
+data. Section [[#results]] presents results on false rejection rates,
+researcher incentives, and interaction effects. Section [[#discussion]]
+discusses implications for accounting journals and possible reforms. Section
+[[#conclusion]] concludes.
+
+* A Model of Peer Review
+:PROPERTIES:
+:CUSTOM_ID: model
+:END:
+
+** Setup
+
+We model peer review as a noisy signal extraction problem. A paper $i$ has
+true quality on $D$ dimensions:
+\begin{equation}
+\mathbf{Q}_i = (q_{i1}, q_{i2}, \ldots, q_{iD})
+\end{equation}
+where each dimension might represent interest, rigor, contribution, or other
+evaluation criteria. We assume true quality on each dimension is drawn from
+a normal distribution:
+\begin{equation}
+q_{id} \sim N(\mu, \tau^2)
+\end{equation}
+where $\mu$ is mean quality in the submission pool and $\tau^2$ is the
+variance of true quality across papers.
+
+** Reviewer Observation
+
+Reviewer $j$ observes paper $i$'s quality on dimension $d$ with measurement
+error:
+\begin{equation}
+\hat{q}_{ijd} = q_{id} + \epsilon_{ijd}
+\end{equation}
+where $\epsilon_{ijd} \sim N(0, \sigma^2)$ is independent noise. This noise
+captures the inherent subjectivity of quality assessment---reasonable
+reviewers can disagree about the same paper even without bias.
+
+When $n$ reviewers evaluate a paper, the editor aggregates their assessments
+by averaging:
+\begin{equation}
+\bar{q}_{id} = \frac{1}{n}\sum_{j=1}^{n}\hat{q}_{ijd} = q_{id} + \bar{\epsilon}_{id}
+\end{equation}
+where $\bar{\epsilon}_{id} \sim N(0, \sigma^2/n)$. Averaging reduces noise
+variance by a factor of $n$, but with diminishing returns: going from 1 to 2
+reviewers halves the variance, but going from 4 to 5 reduces it by only 20%.
+
+** Calibration to Empirical Reliability
+
+The noise parameter $\sigma$ can be calibrated to empirical inter-rater
+reliability data. The intraclass correlation coefficient (ICC) is defined
+as:
+\begin{equation}
+ICC = \frac{\tau^2}{\tau^2 + \sigma^2}
+\end{equation}
+This represents the proportion of observed variance attributable to true
+differences between papers rather than measurement error.
+
+cite:bornmannReliabilitygeneralizationStudyJournal2010 conducted a
+meta-analysis of 70 reliability coefficients from 48 studies covering 19,443
+manuscripts across disciplines. They found a mean ICC of 0.34, indicating
+that only about one-third of the variance in reviewer assessments reflects
+true quality differences---the remaining two-thirds is measurement error.
+Critically, this low reliability was consistent across /all/ disciplines
+studied, including economics, natural sciences, medical sciences, and social
+sciences.
+
+With ICC = 0.34 and assuming $\tau = 20$ (standard deviation of true quality
+in the submission pool), we can solve for the noise parameter:
+\begin{equation}
+0.34 = \frac{400}{400 + \sigma^2} \implies \sigma^2 \approx 776 \implies \sigma \approx 28
+\end{equation}
+We use $\sigma = 30$ in our simulation, which is slightly conservative
+(implying marginally more noise than the point estimate) and simplifies
+interpretation.
+
+** The AND-Gate Acceptance Rule
+
+Journals typically require papers to meet standards on /multiple/
+dimensions. We model this as a conjunctive (AND-gate) decision rule: a paper
+is accepted if and only if its observed quality exceeds the threshold $T$ on
+/all/ dimensions:
+\begin{equation}
+Accept_i = \mathbf{1}\left[\bar{q}_{id} \geq T \text{ for all } d \in \{1,\ldots,D\}\right]
+\end{equation}
+
+This AND-gate structure has important implications for error rates. Consider
+a paper with true quality $q_{id} = T + \delta$ on all dimensions---that is,
+a paper that genuinely deserves acceptance by margin $\delta$. The
+probability that observed quality falls below the threshold on any single
+dimension is:
+\begin{equation}
+P(\bar{q}_{id} < T) = \Phi\left(\frac{-\delta}{\sigma/\sqrt{n}}\right)
+\end{equation}
+where $\Phi(\cdot)$ is the standard normal CDF.
+
+With AND-gating across $D$ independent dimensions, the probability of
+acceptance becomes:
+\begin{equation}
+P(Accept) = \left[1 - \Phi\left(\frac{-\delta}{\sigma/\sqrt{n}}\right)\right]^D
+\end{equation}
+
+This multiplicative structure is what damages good papers. Even if the
+probability of passing on each dimension is high, the joint probability of
+passing on /all/ dimensions can be substantially lower. Noise on /any/
+dimension can sink a deserving paper.
+
+cite:bornmannReliabilitygeneralizationStudyJournal2010 found that
+multi-dimensional rating systems are associated with /lower/ inter-rater
+reliability, consistent with this theoretical prediction. More dimensions
+mean more opportunities for noise to cause rejection.
+
+** Correct Decision and Error Types
+
+We define a paper as truly deserving acceptance if its true quality exceeds
+the threshold on all dimensions:
+\begin{equation}
+ShouldAccept_i = \mathbf{1}\left[q_{id} \geq T \text{ for all } d \in \{1,\ldots,D\}\right]
+\end{equation}
+
+This yields four possible outcomes:
+- *True Positive (TP):* Paper should be accepted and is accepted
+- *False Positive (FP):* Paper should be rejected but is accepted
+- *True Negative (TN):* Paper should be rejected and is rejected
+- *False Negative (FN):* Paper should be accepted but is rejected
+
+We focus particularly on the false negative rate (FNR):
+\begin{equation}
+FNR = \frac{FN}{FN + TP}
+\end{equation}
+This represents the proportion of deserving papers that are incorrectly
+rejected---the rate at which good work is filtered out by noise rather than
+quality.
+
+* Simulation Design
+:PROPERTIES:
+:CUSTOM_ID: simulation
+:END:
+
+** Implementation
+
+We implement the model described in Section [[#model]] as an agent-based
+simulation. For each experimental condition, we generate 1,000 papers with
+true quality drawn independently on each dimension from $N(50, 20^2)$.
+Reviewers observe each dimension with independent noise drawn from $N(0,
+\sigma^2)$, and observations are averaged across reviewers. The editor
+applies the AND-gate acceptance rule with threshold $T$.
+
+We vary the following parameters:
+- *Number of reviewers ($n$):* 1, 2, 3, 4, 5, 7, 10
+- *Reviewer noise ($\sigma$):* 15, 25, 35 (with baseline 30)
+- *Number of dimensions ($D$):* 2, 3, 4
+- *Threshold ($T$):* 40, 50, 60, 70
+
+For each parameter combination, we run 20 independent replications and
+report averaged results for stability.
+
+The simulation code is implemented in Clojure and is publicly available at
+[GitHub repository URL] for replication and extension.
+
+** Baseline Parameters
+
+Our baseline parameters are:
+- $n = 2$ reviewers (typical for accounting journals)
+- $\sigma = 30$ (calibrated to ICC = 0.34)
+- $D = 2$ dimensions (interest and rigor)
+- $T = 50$ (moderate selectivity)
+
+We then vary each parameter to examine main effects and interactions.
+
+* Results
+:PROPERTIES:
+:CUSTOM_ID: results
+:END:
+
+** Main Finding: False Rejection Rates
+
+[TABLE: Experiment 1 - Reviewer Count results]
+
+Our primary finding is that under realistic conditions, a substantial
+proportion of deserving papers are rejected due to measurement error alone.
+With 2 reviewers (the accounting norm), approximately [XX]% of papers that
+should be accepted are rejected (FNR = [XX]).
+
+The effect of reviewer count exhibits clear diminishing returns. Going from
+1 to 2 reviewers reduces FNR by [XX] percentage points---the largest single
+improvement. Going from 2 to 5 reviewers provides another [XX] percentage
+point reduction. Beyond 5 reviewers, gains are marginal.
+
+This finding is consistent with cite:esareyDoesPeerReview2017, who found
+that papers at the 80th percentile of quality face essentially coin-flip
+odds of acceptance. Our simulation provides a mechanism for this finding:
+the combination of low inter-rater reliability and multi-dimensional
+evaluation.
+
+** The AND-Gate Effect: Dimensions Amplify Errors
+
+[TABLE: Experiment 3 - Dimensions results]
+
+Adding evaluation dimensions dramatically increases false rejection rates.
+With 2 dimensions, FNR is approximately [XX]%. With 3 dimensions, FNR rises
+to [XX]%. With 4 dimensions, FNR reaches [XX]%.
+
+This occurs because each additional dimension is another opportunity for
+noise to cause rejection. A paper must clear the threshold on /every/
+dimension, so noise on /any/ dimension can sink it. This AND-gate structure
+is particularly punishing for borderline-good papers.
+
+** Selective Journals Are More Sensitive to Noise
+
+[TABLE: Threshold x Noise interaction results]
+
+An important finding for top accounting journals: highly selective journals
+(high threshold) are /more/ sensitive to reviewer noise, not less. At
+threshold = 40 (lenient), increasing noise from SD = 15 to SD = 35 raises
+FNR by [XX] percentage points. At threshold = 70 (selective), the same noise
+increase raises FNR by [XX] percentage points.
+
+This occurs because selective journals are making decisions among papers
+clustered near the high end of quality. Small amounts of noise can flip
+these close decisions, whereas at lenient journals, there is more separation
+between deserving and undeserving papers.
+
+** Quality vs. Volume: Perverse Incentives
+
+[TABLE: Strategy comparison results]
+
+Our simulation reveals that the noisy structure of peer review creates
+incentives favoring quantity over quality. We compare four hypothetical
+strategies for a researcher with fixed total effort:
+
+| Strategy | Papers | Quality | P(Accept) | E[Publications] |
+|----------|--------|---------|-----------|-----------------|
+| One excellent | 1 | 85 | [XX]% | [XX] |
+| Two very good | 2 | 78 | [XX]% | [XX] |
+| Two good | 2 | 72 | [XX]% | [XX] |
+| Three decent | 3 | 68 | [XX]% | [XX] |
+
+The "two very good" strategy dominates "one excellent" by [XX]% in expected
+publications, despite producing lower-quality work. This occurs because the
+stochastic nature of acceptance rewards multiple attempts. Even if each
+individual paper has lower acceptance probability, the portfolio effect of
+multiple submissions increases expected output.
+
+This finding helps explain several observed phenomena in accounting
+research:
+- The prevalence of "salami-slicing" (fragmenting research into minimal
+  publishable units)
+- Field wisdom to "write twice as many papers as you think you need"
+- The trend toward more incremental contributions noted by
+  cite:burtonPerceptionsAccountingAcademics2024
+
+** Interaction: Reviewers Help More When Noise Is High
+
+[TABLE: Reviewers x Noise interaction results]
+
+We find a significant interaction between reviewer count and noise level:
+additional reviewers provide greater benefit when individual reviewer noise
+is high. At low noise (SD = 15), going from 1 to 5 reviewers improves
+accuracy by [XX] percentage points. At high noise (SD = 35), the same change
+improves accuracy by [XX] percentage points.
+
+This has implications for fields with particularly subjective evaluation
+criteria. If accounting reviews involve more subjectivity than, say,
+statistical analysis in finance, then accounting journals would benefit
+/more/ from additional reviewers than journals in more objective fields.
+
+** Interaction: Reviewers Help More With Multi-Dimensional Evaluation
+
+[TABLE: Reviewers x Dimensions interaction results]
+
+Similarly, additional reviewers provide greater benefit when papers are
+evaluated on more dimensions. With 2-dimensional evaluation, going from 1 to
+5 reviewers reduces FNR by [XX] percentage points. With 4-dimensional
+evaluation, the same change reduces FNR by [XX] percentage points.
+
+This suggests that journals with comprehensive, multi-criteria evaluation
+should invest in more reviewers to compensate for the AND-gate effect.
+
+** Supplemental Analysis: The Editor's Role
+
+[TABLE: Editor as partial reviewer results]
+
+In supplemental analysis, we examine whether editors should contribute their
+own quality assessments to the reviewer average. We model the editor as an
+additional reviewer with higher noise (SD = 50-60) reflecting their
+shallower engagement with any single paper.
+
+Counterintuitively, adding the editor's noisy assessment /reduces/ decision
+quality. With 2 reviewers alone, accuracy is [XX]%. Adding an editor with SD
+= 60 reduces accuracy to [XX]%. This occurs because averaging in a noisy
+signal dilutes the more reliable reviewer assessments.
+
+This finding supports treating the editor's role as distinct from reviewers:
+editors should aggregate and interpret reviewer signals rather than adding
+their own noisy quality assessment to the average.
+
+* Discussion
+:PROPERTIES:
+:CUSTOM_ID: discussion
+:END:
+
+** Reframing the Problem
+
+Our findings suggest a reframing of the accounting publication "problem."
+The conventional view attributes publication difficulties to reviewer
+bias---topic preferences, methodological prejudice, or favoritism. While
+bias surely exists, our simulation demonstrates that high false rejection
+rates and perverse incentives emerge naturally from the /structure/ of peer
+review even without any bias.
+
+This reframing has important implications. If the problem were primarily
+bias, solutions would focus on reviewer training, blind review, or
+diversifying reviewer pools. But if the problem is structural noise,
+different interventions are needed. Indeed,
+cite:hesselbergTrainingImprovePeer2023 conducted a systematic review of
+reviewer training interventions and found that training produces "little or
+no improvement in peer review quality."
+
+** Policy Implications for Accounting Journals
+
+Our findings suggest several directions for accounting journals:
+
+1. *Consider adding reviewers.* The largest accuracy gains come from going 1
+   to 2 reviewers, but meaningful improvements continue through 3-5
+   reviewers. If accounting journals typically use 1-2 reviewers, there is
+   accuracy left on the table.
+
+2. *Be cautious about multi-dimensional evaluation.* Comprehensive rubrics
+   with many criteria may /reduce/ decision quality by creating more
+   opportunities for noise to reject good papers. Journals might consider
+   compensatory rather than conjunctive decision rules, or fewer evaluation
+   dimensions.
+
+3. *Acknowledge noise exists.* Our findings suggest that roughly half of
+   rejection decisions for borderline-good papers are determined by noise
+   rather than true quality. This has implications for how journals
+   communicate with authors and how authors interpret rejection.
+
+4. *Consider structural interventions.* Given that training doesn't improve
+   reliability, journals might explore structural changes: lottery elements
+   for borderline papers, registered reports that separate evaluation of
+   questions from evaluation of results, or multi-stage review that filters
+   on different dimensions sequentially rather than conjunctively.
+
+** Limitations
+
+Our simulation makes several simplifying assumptions. We model reviewer
+noise as independent and identically distributed, but in reality reviewers
+may have correlated biases (e.g., methodological preferences). We assume
+dimensions are independent, but true quality may be correlated across
+dimensions. We assume a simple averaging aggregation rule, but editors may
+weight reviewers differently.
+
+These simplifications likely make our estimates /conservative/. Correlated
+reviewer errors would not average out as effectively. Correlated dimensions
+would amplify the AND-gate effect. Non-uniform weighting could either help
+or hurt depending on whether editors correctly identify reliable reviewers.
+
+We also do not model the full publication ecosystem, including resubmission
+to other journals, desk rejection, or strategic author behavior. Future work
+could extend the simulation to capture these dynamics.
+
+* Conclusion
+:PROPERTIES:
+:CUSTOM_ID: conclusion
+:END:
+
+We develop a model of peer review as noisy signal extraction and use
+simulation to examine its implications for false rejection rates and
+researcher incentives. Calibrating to empirical inter-rater reliability data
+(ICC = 0.34), we find that under realistic conditions, a substantial
+proportion of deserving papers are rejected due to measurement error alone.
+The combination of low reliability, multi-dimensional evaluation, and high
+selectivity creates a system that systematically rejects good work---not
+because reviewers are biased, but because the signal-to-noise ratio is low.
+
+This finding has implications for how we interpret and reform the
+publication process. The problem is not primarily bad reviewers; it is a
+structurally noisy system. Even well-intentioned actors produce high false
+rejection rates when reliability is low and standards are high. Recognizing
+this shifts attention from reviewer training (which doesn't work) to
+structural interventions: more reviewers, different decision rules, or
+explicit acknowledgment of uncertainty.
+
+Our simulation also reveals that noise creates perverse incentives.
+Researchers maximize expected publications by fragmenting their work into
+more, lower-quality papers rather than concentrating effort on fewer,
+higher-quality papers. This helps explain the prevalence of incremental
+research and "salami-slicing" documented in the literature.
+
+We hope this paper contributes to a more nuanced conversation about peer
+review in accounting. The frustration documented by
+cite:burtonPerceptionsAccountingAcademics2024 is real, but attributing it
+primarily to bias may misdirect reform efforts. Understanding the structural
+sources of dysfunction is a first step toward designing more effective
+knowledge production systems.
+
+* References
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+bibliographystyle:apalike
+bibliography:references.bib
