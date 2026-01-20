@@ -23,7 +23,7 @@ review---specifically, low inter-rater reliability combined with
 multi-dimensional conjunctive evaluation---produce systematic dysfunction
 that disadvantages quality research even without bias. Using a simulation
 calibrated to empirical reliability data (ICC = 0.34), we demonstrate that
-at realistic selectivity levels, approximately [XX]% of deserving papers are
+at realistic selectivity levels, approximately 45% of deserving papers are
 rejected due to measurement error alone. This error structure creates
 perverse incentives: researchers maximize expected publications by producing
 multiple moderate-quality papers rather than single excellent papers. Our
@@ -42,7 +42,7 @@ perceptions have only worsened: the rising generation of scholars holds even
 more negative views than their predecessors, respondents believe acceptance
 rates should nearly double, and there is widespread concern that top
 journals favor narrow methodologies while underweighting practice relevance.
-Perhaps most troublingly, cite:burtonDoWeMatter2021 documented that
+Perhaps most troublingly, cite:burtonWeMatterAttention2021 documented that
 accounting research receives significantly less attention from policymakers
 and the public than economics, finance, and other disciplines.
 
@@ -57,7 +57,11 @@ multi-dimensional conjunctive evaluation criteria---may produce systematic
 dysfunction that disadvantages quality research even in the /absence/ of
 bias.
 
-Our contribution is to show that high false rejection rates emerge naturally
+The possibility that chance plays a substantial role in peer review is not
+new. cite:coleChanceConsensusPeer1981 famously demonstrated that "whether or
+not a proposal is funded depends in a large proportion of cases upon which
+reviewers happen to be selected for it." Our contribution is to formalize
+this intuition and show that high false rejection rates emerge naturally
 from subjectivity alone. Using an agent-based simulation calibrated to
 empirical reliability data, we demonstrate that at realistic selectivity
 levels, a substantial fraction of truly deserving papers are rejected due to
@@ -129,7 +133,7 @@ ICC = \frac{\tau^2}{\tau^2 + \sigma^2}
 This represents the proportion of observed variance attributable to true
 differences between papers rather than measurement error.
 
-cite:bornmannReliabilitygeneralizationStudyJournal2010 conducted a
+cite:bornmannReliabilityGeneralizationStudyJournal2010 conducted a
 meta-analysis of 70 reliability coefficients from 48 studies covering 19,443
 manuscripts across disciplines. They found a mean ICC of 0.34, indicating
 that only about one-third of the variance in reviewer assessments reflects
@@ -178,7 +182,7 @@ probability of passing on each dimension is high, the joint probability of
 passing on /all/ dimensions can be substantially lower. Noise on /any/
 dimension can sink a deserving paper.
 
-cite:bornmannReliabilitygeneralizationStudyJournal2010 found that
+cite:bornmannReliabilityGeneralizationStudyJournal2010 found that
 multi-dimensional rating systems are associated with /lower/ inter-rater
 reliability, consistent with this theoretical prediction. More dimensions
 mean more opportunities for noise to cause rejection.
@@ -228,8 +232,8 @@ We vary the following parameters:
 For each parameter combination, we run 20 independent replications and
 report averaged results for stability.
 
-The simulation code is implemented in Clojure and is publicly available at
-[GitHub repository URL] for replication and extension.
+The simulation code is implemented in Clojure and is available at
+https://github.com/drdebit/publication-sim for replication and extension.
 
 ** Baseline Parameters
 
@@ -248,16 +252,25 @@ We then vary each parameter to examine main effects and interactions.
 
 ** Main Finding: False Rejection Rates
 
-[TABLE: Experiment 1 - Reviewer Count results]
+#+CAPTION: Effect of Reviewer Count on Decision Quality
+| Reviewers | FNR    | FPR    | Accuracy | Reliability |
+|-----------+--------+--------+----------+-------------|
+|         1 | 51.9%  |  17.6% |    73.8% |       55.8% |
+|         2 | 45.0%  |  15.0% |    77.4% |       68.5% |
+|         3 | 38.8%  |  13.2% |    80.5% |       75.3% |
+|         4 | 37.6%  |  12.4% |    81.4% |       80.2% |
+|         5 | 34.5%  |  11.1% |    83.1% |       83.2% |
+|         7 | 30.0%  |   9.9% |    85.1% |       86.6% |
+|        10 | 27.7%  |   9.3% |    86.3% |       90.2% |
 
 Our primary finding is that under realistic conditions, a substantial
 proportion of deserving papers are rejected due to measurement error alone.
-With 2 reviewers (the accounting norm), approximately [XX]% of papers that
-should be accepted are rejected (FNR = [XX]).
+With 2 reviewers (the accounting norm), approximately 45% of papers that
+should be accepted are rejected (FNR = 0.45).
 
 The effect of reviewer count exhibits clear diminishing returns. Going from
-1 to 2 reviewers reduces FNR by [XX] percentage points---the largest single
-improvement. Going from 2 to 5 reviewers provides another [XX] percentage
+1 to 2 reviewers reduces FNR by 6.9 percentage points---the largest single
+improvement. Going from 2 to 5 reviewers provides another 10.5 percentage
 point reduction. Beyond 5 reviewers, gains are marginal.
 
 This finding is consistent with cite:esareyDoesPeerReview2017, who found
@@ -268,48 +281,68 @@ evaluation.
 
 ** The AND-Gate Effect: Dimensions Amplify Errors
 
-[TABLE: Experiment 3 - Dimensions results]
+#+CAPTION: Effect of Evaluation Dimensions (AND-gating)
+| Dimensions | FNR    | FPR   | Accuracy |
+|------------+--------+-------+----------|
+|          2 | 45.3%  | 15.3% |    77.1% |
+|          3 | 60.0%  |  8.5% |    85.1% |
+|          4 | 70.5%  |  4.5% |    91.6% |
 
 Adding evaluation dimensions dramatically increases false rejection rates.
-With 2 dimensions, FNR is approximately [XX]%. With 3 dimensions, FNR rises
-to [XX]%. With 4 dimensions, FNR reaches [XX]%.
+With 2 dimensions, FNR is approximately 45%. With 3 dimensions, FNR rises
+to 60%. With 4 dimensions, FNR reaches 71%.
 
 This occurs because each additional dimension is another opportunity for
 noise to cause rejection. A paper must clear the threshold on /every/
 dimension, so noise on /any/ dimension can sink it. This AND-gate structure
 is particularly punishing for borderline-good papers.
 
-** Selective Journals Are More Sensitive to Noise
+** Selective Journals Face Higher Baseline FNR
 
-[TABLE: Threshold x Noise interaction results]
+#+CAPTION: Threshold × Noise Interaction
+| Threshold | Noise SD | Accuracy | FNR    | FPR   |
+|-----------+----------+----------+--------+-------|
+|        40 |       15 |    82.0% | 21.1%  | 15.1% |
+|        40 |       25 |    74.1% | 33.5%  | 18.8% |
+|        40 |       35 |    68.3% | 42.0%  | 22.2% |
+|        50 |       15 |    85.6% | 29.2%  |  9.4% |
+|        50 |       25 |    79.8% | 41.5%  | 13.2% |
+|        50 |       35 |    75.2% | 49.1%  | 16.6% |
+|        60 |       15 |    91.9% | 34.8%  |  5.2% |
+|        60 |       25 |    88.3% | 47.4%  |  8.2% |
+|        60 |       35 |    84.9% | 55.2%  | 10.9% |
+|        70 |       15 |    96.9% | 39.2%  |  2.1% |
+|        70 |       25 |    94.8% | 48.9%  |  4.2% |
+|        70 |       35 |    92.5% | 54.8%  |  6.2% |
 
 An important finding for top accounting journals: highly selective journals
-(high threshold) are /more/ sensitive to reviewer noise, not less. At
-threshold = 40 (lenient), increasing noise from SD = 15 to SD = 35 raises
-FNR by [XX] percentage points. At threshold = 70 (selective), the same noise
-increase raises FNR by [XX] percentage points.
+(high threshold) have /higher baseline/ false negative rates. Even with low
+noise (SD = 15), a threshold of 70 yields an FNR of 39%---nearly double the
+21% at a lenient threshold of 40. At high noise (SD = 35), selective
+journals reach an FNR of 55%.
 
 This occurs because selective journals are making decisions among papers
-clustered near the high end of quality. Small amounts of noise can flip
-these close decisions, whereas at lenient journals, there is more separation
-between deserving and undeserving papers.
+clustered near the high end of quality. Most truly deserving papers are only
+marginally above threshold, making them vulnerable to downward noise. At
+lenient journals, there is more separation between deserving and undeserving
+papers, so noise is less likely to cause misclassification.
 
 ** Quality vs. Volume: Perverse Incentives
 
-[TABLE: Strategy comparison results]
-
 Our simulation reveals that the noisy structure of peer review creates
 incentives favoring quantity over quality. We compare four hypothetical
-strategies for a researcher with fixed total effort:
+strategies for a researcher with fixed total effort (at threshold = 70, 2
+reviewers, noise SD = 30):
 
-| Strategy | Papers | Quality | P(Accept) | E[Publications] |
-|----------|--------|---------|-----------|-----------------|
-| One excellent | 1 | 85 | [XX]% | [XX] |
-| Two very good | 2 | 78 | [XX]% | [XX] |
-| Two good | 2 | 72 | [XX]% | [XX] |
-| Three decent | 3 | 68 | [XX]% | [XX] |
+#+CAPTION: Strategy Comparison: Quality vs. Volume
+| Strategy       | Papers | Quality | P(Accept) | E[Publications] |
+|----------------+--------+---------+-----------+-----------------|
+| Two very good  |      2 |      78 |     40.9% |            0.82 |
+| Three decent   |      3 |      68 |     20.0% |            0.60 |
+| Two good       |      2 |      72 |     28.5% |            0.57 |
+| One excellent  |      1 |      85 |     56.4% |            0.56 |
 
-The "two very good" strategy dominates "one excellent" by [XX]% in expected
+The "two very good" strategy dominates "one excellent" by 46% in expected
 publications, despite producing lower-quality work. This occurs because the
 stochastic nature of acceptance rewards multiple attempts. Even if each
 individual paper has lower acceptance probability, the portfolio effect of
@@ -323,15 +356,37 @@ research:
 - The trend toward more incremental contributions noted by
   cite:burtonPerceptionsAccountingAcademics2024
 
+The incentive structure we document may also discourage scientific
+risk-taking. cite:azoulayDoesPeerReview2025 provide evidence that peer
+review penalizes researchers who pursue bold, unconventional work. Our
+simulation suggests a mechanism: innovative research may face higher
+variance in reviewer assessments (less consensus on what "good" looks like),
+amplifying the AND-gate effect and making conservative, incremental work
+relatively more attractive.
+
 ** Interaction: Reviewers Help More When Noise Is High
 
-[TABLE: Reviewers x Noise interaction results]
+#+CAPTION: Reviewers × Noise Interaction
+| Noise SD | Reviewers | Accuracy | FNR    |
+|----------+-----------+----------+--------|
+|       15 |         1 |    82.1% | 35.8%  |
+|       15 |         2 |    85.6% | 28.3%  |
+|       15 |         3 |    88.3% | 24.3%  |
+|       15 |         5 |    89.9% | 21.0%  |
+|       25 |         1 |    75.8% | 49.0%  |
+|       25 |         2 |    79.7% | 39.9%  |
+|       25 |         3 |    81.8% | 36.1%  |
+|       25 |         5 |    84.9% | 30.3%  |
+|       35 |         1 |    72.6% | 54.6%  |
+|       35 |         2 |    75.6% | 48.1%  |
+|       35 |         3 |    78.0% | 44.0%  |
+|       35 |         5 |    81.2% | 37.4%  |
 
 We find a significant interaction between reviewer count and noise level:
 additional reviewers provide greater benefit when individual reviewer noise
 is high. At low noise (SD = 15), going from 1 to 5 reviewers improves
-accuracy by [XX] percentage points. At high noise (SD = 35), the same change
-improves accuracy by [XX] percentage points.
+accuracy by 7.8 percentage points. At high noise (SD = 35), the same change
+improves accuracy by 8.6 percentage points.
 
 This has implications for fields with particularly subjective evaluation
 criteria. If accounting reviews involve more subjectivity than, say,
@@ -340,19 +395,44 @@ statistical analysis in finance, then accounting journals would benefit
 
 ** Interaction: Reviewers Help More With Multi-Dimensional Evaluation
 
-[TABLE: Reviewers x Dimensions interaction results]
+#+CAPTION: Reviewers × Dimensions Interaction
+| Dimensions | Reviewers | Accuracy | FNR    | FPR   |
+|------------+-----------+----------+--------+-------|
+|         2D |         1 |    73.5% | 52.7%  | 18.0% |
+|         2D |         2 |    77.5% | 45.4%  | 14.9% |
+|         2D |         3 |    79.8% | 41.0%  | 13.1% |
+|         2D |         5 |    83.3% | 34.4%  | 10.8% |
+|         3D |         1 |    82.8% | 69.6%  |  9.5% |
+|         3D |         2 |    85.5% | 59.6%  |  8.0% |
+|         3D |         3 |    86.5% | 54.6%  |  7.6% |
+|         3D |         5 |    88.5% | 45.0%  |  6.7% |
+|         4D |         1 |    90.4% | 78.3%  |  5.0% |
+|         4D |         2 |    91.1% | 70.0%  |  4.6% |
+|         4D |         3 |    92.0% | 64.6%  |  4.1% |
+|         4D |         5 |    92.9% | 56.6%  |  3.7% |
 
 Similarly, additional reviewers provide greater benefit when papers are
 evaluated on more dimensions. With 2-dimensional evaluation, going from 1 to
-5 reviewers reduces FNR by [XX] percentage points. With 4-dimensional
-evaluation, the same change reduces FNR by [XX] percentage points.
+5 reviewers reduces FNR by 18.3 percentage points. With 4-dimensional
+evaluation, the same change reduces FNR by 21.7 percentage points.
 
 This suggests that journals with comprehensive, multi-criteria evaluation
 should invest in more reviewers to compensate for the AND-gate effect.
 
 ** Supplemental Analysis: The Editor's Role
 
-[TABLE: Editor as partial reviewer results]
+#+CAPTION: Editor as Partial Reviewer (Supplemental)
+| Model              | Reviewers | Editor SD | FNR    | Accuracy |
+|--------------------+-----------+-----------+--------+----------|
+| Editor-as-reviewer |         1 |        50 | 52.3%  |    74.2% |
+| Editor-as-reviewer |         1 |        60 | 55.6%  |    72.6% |
+| Main model         |         1 |       n/a | 52.4%  |    74.1% |
+| Editor-as-reviewer |         2 |        50 | 45.7%  |    77.0% |
+| Editor-as-reviewer |         2 |        60 | 47.6%  |    76.1% |
+| Main model         |         2 |       n/a | 45.0%  |    77.7% |
+| Editor-as-reviewer |         3 |        50 | 41.0%  |    80.0% |
+| Editor-as-reviewer |         3 |        60 | 43.5%  |    78.5% |
+| Main model         |         3 |       n/a | 40.2%  |    79.7% |
 
 In supplemental analysis, we examine whether editors should contribute their
 own quality assessments to the reviewer average. We model the editor as an
@@ -360,8 +440,8 @@ additional reviewer with higher noise (SD = 50-60) reflecting their
 shallower engagement with any single paper.
 
 Counterintuitively, adding the editor's noisy assessment /reduces/ decision
-quality. With 2 reviewers alone, accuracy is [XX]%. Adding an editor with SD
-= 60 reduces accuracy to [XX]%. This occurs because averaging in a noisy
+quality. With 2 reviewers alone, accuracy is 77.7%. Adding an editor with SD
+= 60 reduces accuracy to 76.1%. This occurs because averaging in a noisy
 signal dilutes the more reliable reviewer assessments.
 
 This finding supports treating the editor's role as distinct from reviewers:
@@ -386,7 +466,7 @@ This reframing has important implications. If the problem were primarily
 bias, solutions would focus on reviewer training, blind review, or
 diversifying reviewer pools. But if the problem is structural noise,
 different interventions are needed. Indeed,
-cite:hesselbergTrainingImprovePeer2023 conducted a systematic review of
+cite:hesselbergReviewerTrainingImproving2023 conducted a systematic review of
 reviewer training interventions and found that training produces "little or
 no improvement in peer review quality."
 
@@ -475,4 +555,4 @@ knowledge production systems.
 :END:
 
 bibliographystyle:apalike
-bibliography:references.bib
+bibliography:~/Dropbox/BibLaTeX/library.bib
