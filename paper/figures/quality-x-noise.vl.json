@@ -1,0 +1,74 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How Noise Redistributes Acceptance: Good Papers Lose, Bad Papers Gain",
+    "fontSize": 14
+  },
+  "width": 450,
+  "height": 300,
+  "data": {
+    "values": [
+      {"quality": 50, "noise": "Low Noise (SD=15)", "probability": 0.2},
+      {"quality": 60, "noise": "Low Noise (SD=15)", "probability": 2.8},
+      {"quality": 70, "noise": "Low Noise (SD=15)", "probability": 26.8},
+      {"quality": 80, "noise": "Low Noise (SD=15)", "probability": 66.7},
+      {"quality": 90, "noise": "Low Noise (SD=15)", "probability": 93.9},
+      {"quality": 50, "noise": "Medium Noise (SD=30)", "probability": 3.4},
+      {"quality": 60, "noise": "Medium Noise (SD=30)", "probability": 11.0},
+      {"quality": 70, "noise": "Medium Noise (SD=30)", "probability": 24.3},
+      {"quality": 80, "noise": "Medium Noise (SD=30)", "probability": 46.1},
+      {"quality": 90, "noise": "Medium Noise (SD=30)", "probability": 67.7},
+      {"quality": 50, "noise": "High Noise (SD=45)", "probability": 7.0},
+      {"quality": 60, "noise": "High Noise (SD=45)", "probability": 13.6},
+      {"quality": 70, "noise": "High Noise (SD=45)", "probability": 23.8},
+      {"quality": 80, "noise": "High Noise (SD=45)", "probability": 37.6},
+      {"quality": 90, "noise": "High Noise (SD=45)", "probability": 51.6}
+    ]
+  },
+  "layer": [
+    {
+      "mark": {"type": "line", "point": {"size": 80}, "strokeWidth": 2.5},
+      "encoding": {
+        "x": {
+          "field": "quality",
+          "type": "quantitative",
+          "title": "True Paper Quality",
+          "scale": {"domain": [45, 95]},
+          "axis": {"tickCount": 5}
+        },
+        "y": {
+          "field": "probability",
+          "type": "quantitative",
+          "title": "Acceptance Probability (%)",
+          "scale": {"domain": [0, 100]}
+        },
+        "color": {
+          "field": "noise",
+          "type": "nominal",
+          "title": "Reviewer Noise",
+          "scale": {"range": ["#2563eb", "#9333ea", "#dc2626"]},
+          "sort": ["Low Noise (SD=15)", "Medium Noise (SD=30)", "High Noise (SD=45)"]
+        }
+      }
+    },
+    {
+      "mark": {"type": "rule", "strokeDash": [6, 4], "color": "#6b7280", "strokeWidth": 1.5},
+      "encoding": {
+        "x": {"datum": 70}
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 5, "dy": -10, "fontSize": 11, "color": "#6b7280"},
+      "encoding": {
+        "x": {"datum": 70},
+        "y": {"datum": 95},
+        "text": {"value": "Threshold"}
+      }
+    }
+  ],
+  "config": {
+    "font": "Helvetica",
+    "axis": {"labelFontSize": 11, "titleFontSize": 12},
+    "legend": {"labelFontSize": 11, "titleFontSize": 12}
+  }
+}

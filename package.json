@@ -1,0 +1,30 @@
+{
+  "name": "publication-sim",
+  "version": "1.0.0",
+  "description": "FIXME: description",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drdebit/publication-sim.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drdebit/publication-sim/issues"
+  },
+  "homepage": "https://github.com/drdebit/publication-sim#readme",
+  "dependencies": {
+    "canvas": "^3.2.1",
+    "vega": "^6.2.0",
+    "vega-cli": "^6.2.0",
+    "vega-lite": "^6.4.2"
+  }
+}

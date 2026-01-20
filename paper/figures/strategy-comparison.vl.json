@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Perverse Incentives: Lower Quality Strategy Yields More Publications",
+    "fontSize": 14
+  },
+  "width": 400,
+  "height": 300,
+  "data": {
+    "values": [
+      {"strategy": "Two Very Good", "expected": 0.82, "papers": 2, "quality": 78, "label": "2 papers\nQ=78"},
+      {"strategy": "Three Decent", "expected": 0.60, "papers": 3, "quality": 68, "label": "3 papers\nQ=68"},
+      {"strategy": "Two Good", "expected": 0.57, "papers": 2, "quality": 72, "label": "2 papers\nQ=72"},
+      {"strategy": "One Excellent", "expected": 0.56, "papers": 1, "quality": 85, "label": "1 paper\nQ=85"}
+    ]
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar", "color": "#2563eb", "cornerRadiusTopLeft": 3, "cornerRadiusTopRight": 3},
+      "encoding": {
+        "x": {
+          "field": "strategy",
+          "type": "nominal",
+          "title": "Research Strategy (Fixed Total Effort)",
+          "sort": {"field": "expected", "order": "descending"},
+          "axis": {"labelAngle": 0, "labelFontSize": 11}
+        },
+        "y": {
+          "field": "expected",
+          "type": "quantitative",
+          "title": "Expected Publications",
+          "scale": {"domain": [0, 1]}
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": -8, "fontSize": 12, "fontWeight": "bold"},
+      "encoding": {
+        "x": {
+          "field": "strategy",
+          "type": "nominal",
+          "sort": {"field": "expected", "order": "descending"}
+        },
+        "y": {
+          "field": "expected",
+          "type": "quantitative"
+        },
+        "text": {"field": "expected", "format": ".2f"}
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": 20, "fontSize": 10, "color": "white"},
+      "encoding": {
+        "x": {
+          "field": "strategy",
+          "type": "nominal",
+          "sort": {"field": "expected", "order": "descending"}
+        },
+        "y": {
+          "field": "expected",
+          "type": "quantitative"
+        },
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "config": {
+    "font": "Helvetica",
+    "axis": {"labelFontSize": 11, "titleFontSize": 12},
+    "view": {"stroke": null}
+  }
+}

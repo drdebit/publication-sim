@@ -33,3 +33,7 @@ auto/
 .clj-kondo/.cache/
 .lsp/.cache/
 .calva/
+
+# Node modules (for vega-lite chart generation)
+node_modules/
+package-lock.json

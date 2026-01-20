@@ -327,6 +327,25 @@ marginally above threshold, making them vulnerable to downward noise. At
 lenient journals, there is more separation between deserving and undeserving
 papers, so noise is less likely to cause misclassification.
 
+** Noise Helps Bad Papers, Hurts Good Papers
+
+#+CAPTION: The lines cross at the threshold: noise systematically redistributes acceptance from deserving to undeserving papers.
+#+NAME: fig:quality-noise
+#+ATTR_LATEX: :width 0.85\textwidth :placement [htbp]
+[[file:figures/quality-x-noise.pdf]]
+
+Figure [[fig:quality-noise]] reveals a striking pattern: noise does not merely
+add randomness---it systematically redistributes acceptance probability from
+good papers to bad ones. At quality = 90 (excellent papers), acceptance
+probability drops from 94% with low noise to 52% with high noise. At quality
+= 50 (papers that should be rejected), acceptance probability /rises/ from
+0.2% to 7%.
+
+The lines converge near the threshold (quality = 70), where acceptance
+probability is roughly 25% regardless of noise level. This means borderline
+papers face a coin-flip regardless of system reliability, while the benefit
+of writing excellent work is dramatically eroded by noise.
+
 ** Quality vs. Volume: Perverse Incentives
 
 Our simulation reveals that the noisy structure of peer review creates
@@ -341,6 +360,11 @@ reviewers, noise SD = 30):
 | Three decent   |      3 |      68 |     20.0% |            0.60 |
 | Two good       |      2 |      72 |     28.5% |            0.57 |
 | One excellent  |      1 |      85 |     56.4% |            0.56 |
+
+#+CAPTION: The "two very good" strategy dominates despite lower quality, because stochastic acceptance rewards multiple attempts.
+#+NAME: fig:strategy
+#+ATTR_LATEX: :width 0.8\textwidth :placement [htbp]
+[[file:figures/strategy-comparison.pdf]]
 
 The "two very good" strategy dominates "one excellent" by 46% in expected
 publications, despite producing lower-quality work. This occurs because the
