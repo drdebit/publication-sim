@@ -74,13 +74,149 @@ rather than single "excellent" papers, explaining the prevalence of
 incremental research and fragmentation strategies documented in the
 literature.
 
-The remainder of this paper proceeds as follows. Section [[#model]] develops
-a formal model of peer review as noisy signal extraction. Section
-[[#simulation]] describes our simulation design and calibration to empirical
-data. Section [[#results]] presents results on false rejection rates,
-researcher incentives, and interaction effects. Section [[#discussion]]
-discusses implications for accounting journals and possible reforms. Section
-[[#conclusion]] concludes.
+The remainder of this paper proceeds as follows. Section [[#lit-review]]
+reviews prior research on peer review reliability and positions our
+contribution. Section [[#model]] develops a formal model of peer review as
+noisy signal extraction. Section [[#simulation]] describes our simulation
+design and calibration to empirical data. Section [[#results]] presents
+results on false rejection rates, researcher incentives, and interaction
+effects. Section [[#discussion]] discusses implications for accounting
+journals and possible reforms. Section [[#conclusion]] concludes.
+
+* Prior Research
+:PROPERTIES:
+:CUSTOM_ID: lit-review
+:END:
+
+** Inter-Rater Reliability in Peer Review
+
+The empirical foundation for our simulation comes from a large literature
+documenting low inter-rater reliability in peer review across disciplines.
+cite:bornmannReliabilityGeneralizationStudyJournal2010 conducted a
+meta-analysis of 70 reliability coefficients from 48 studies covering 19,443
+manuscripts. They found a mean intraclass correlation coefficient (ICC) of
+0.34 and a mean Cohen's kappa of 0.17, indicating that only about one-third
+of the variance in reviewer assessments reflects true quality
+differences---the remaining two-thirds is measurement error.
+
+Critically, this low reliability was consistent across /all/ disciplines
+studied, including economics, law, natural sciences, medical sciences, and
+social sciences. This cross-disciplinary consistency suggests that low
+reliability is an inherent feature of subjective quality assessment rather
+than a problem specific to any field. cite:bornmannReliabilityGeneralizationStudyJournal2010
+also found that multi-dimensional rating systems were associated with
+/lower/ inter-rater reliability, a finding with important implications for
+the AND-gate effect we model below.
+
+The phenomenon of chance in peer review has been recognized for decades.
+cite:coleChanceConsensusPeer1981 studied 150 NSF proposals that were each
+reviewed by two independent panels and famously concluded that "whether or
+not a proposal is funded depends in a large proportion of cases upon which
+reviewers happen to be selected for it." This finding---that the same
+proposal could be funded or rejected depending on random reviewer
+assignment---remains one of the most cited demonstrations of the stochastic
+nature of peer review.
+
+** Simulation Studies of Peer Review
+
+Our work builds on a growing literature using simulation to study peer
+review systems. cite:neffPeerReviewGame2006 developed a probability theory
+model and characterized peer review as a "game of chance," finding that
+25--50% of unsuitable papers may be published even with rigorous review
+processes. They also showed that resubmission strategies---submitting
+rejected papers to other journals---significantly boost publication chances,
+a precursor to the strategic behavior we analyze.
+
+cite:esareyDoesPeerReview2017 conducted a simulation study of editors,
+reviewers, and the publication process in political science. His key finding
+was that papers at the 80th percentile of quality face essentially coin-flip
+odds of acceptance, remarkably consistent with our false negative rates
+under realistic parameters. Esarey also demonstrated that conjunctive
+thresholds---requiring papers to pass on multiple dimensions---amplify error
+rates. Our work extends this insight by formally modeling the AND-gate
+effect and calibrating to empirical reliability data.
+
+** Scholarly Consensus and Methodological Agreement
+
+An important theoretical question is whether reviewer disagreement stems
+from fundamental uncertainty about quality or from lack of consensus on
+evaluation criteria. cite:hargensScholarlyConsensusJournal1988 argued that
+interdisciplinary variation in rejection rates reflects variation in
+/scholarly consensus/: "When scholars do not share conceptions of
+appropriate research problems, theoretical approaches, or research
+techniques, they tend to view each other's work as deficient and unworthy of
+publication."
+
+This insight has implications for accounting, where multiple methodological
+traditions coexist (archival, experimental, analytical, qualitative) and
+where cite:burtonPerceptionsAccountingAcademics2024 document concerns that
+top journals favor narrow methodologies. If reviewers from different
+methodological traditions disagree about what constitutes good research, the
+effective ICC may be lower than the cross-disciplinary average, amplifying
+the problems we document.
+
+** The Accounting Publication Context
+
+Several studies document growing dissatisfaction with the accounting
+publication process. cite:woodComparingPublicationProcess2016 compared
+publication processes across accounting, economics, finance, management,
+marketing, psychology, and natural sciences. He found that accounting
+academics perceived very low citation patterns relative to other
+disciplines, believed the review process was deteriorating, and desired
+acceptance rates roughly twice as high as current levels.
+
+cite:burtonPerceptionsAccountingAcademics2024 updated this survey and found
+perceptions have worsened since 2015. The rising generation of scholars
+holds more negative views than their predecessors. Respondents believe that
+top journals favor certain topic areas and methodologies, that reviewers
+underweight practice relevance, and that reviewers overweight incremental
+contribution and methodological rigor. The finding that new assistant
+professors hold these views /more strongly/ than senior faculty suggests the
+problem is intensifying rather than ameliorating.
+
+The consequences of publication dysfunction may extend beyond individual
+careers. cite:burtonWeMatterAttention2021 documented that accounting
+research receives significantly less attention from policymakers and the
+general public than economics, finance, and other disciplines. While
+causality is difficult to establish, if peer review dysfunction steers
+accounting research toward narrow, incremental contributions, this could
+partly explain the field's limited external impact.
+
+** Interventions and Training
+
+A natural question is whether peer review can be improved through training
+or procedural reforms. cite:hesselbergReviewerTrainingImproving2023
+conducted a systematic review of ten randomized controlled trials examining
+reviewer training interventions. They found that training produces "little
+or no improvement in peer review quality." Structured review forms similarly
+fail to improve agreement. These null findings suggest that low reliability
+is not primarily a problem of reviewer skill or effort---it reflects
+fundamental uncertainty in quality assessment.
+
+The Spearman-Brown prophecy formula suggests that reliability can be
+improved by adding reviewers, but with sharply diminishing returns: going
+from one to two reviewers halves the error variance, but going from four to
+five reduces it by only 20%. Given the costs of additional reviews, there
+are practical limits to this strategy. Our simulation quantifies these
+diminishing returns and shows that meaningful improvements require
+structural changes rather than marginal additions.
+
+** Contributions
+
+Our work makes several contributions relative to this literature. First, we
+provide an integrated framework that combines empirical reliability data
+(ICC = 0.34), multi-dimensional evaluation, conjunctive decision rules, and
+strategic researcher behavior in a single model. Second, we calibrate to
+empirical data rather than using arbitrary parameters, allowing quantitative
+predictions about error rates. Third, we derive the researcher's optimal
+response to noisy peer review and show that quantity dominates quality in
+expected publications---a prediction that matches observed behavior
+(salami-slicing, fragmentation) without requiring irrationality or bias.
+Fourth, we examine interaction effects (reviewers × noise, reviewers ×
+dimensions, threshold × noise) that reveal when interventions are most
+effective. Finally, we apply these insights specifically to accounting,
+where concerns about publication dysfunction are acute but no
+accounting-specific reliability data exists.
 
 * A Model of Peer Review
 :PROPERTIES:
