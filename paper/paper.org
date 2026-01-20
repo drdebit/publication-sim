@@ -312,7 +312,9 @@ calibration, multi-dimensional evaluation, and conjunctive decision rules in a
 single model. Unlike cite:esareyDoesPeerReview2017, who simulates
 single-dimension review, I explicitly model the AND-gate structure of
 multi-criterion evaluation and show that it substantially amplifies error
-rates.
+rates. This distinction matters because real peer review almost universally
+relies on conjunctive, rubric-based decisions---a paper must pass on interest
+/and/ rigor /and/ contribution, not merely score well on average.
 
 Second, I derive /incentive implications/ from the error structure. While prior
 work documents that peer review is noisy, I show that the specific form of
@@ -461,6 +463,30 @@ quality.
 :PROPERTIES:
 :CUSTOM_ID: simulation
 :END:
+
+** Why Simulation?
+
+Before describing the simulation, it is worth explaining why simulation is
+necessary rather than simply analyzing observational data on peer review
+outcomes.
+
+The fundamental challenge is that /true quality is unobserved/. Empirical data
+can reveal what was accepted and rejected, but not what /should/ have been
+accepted and rejected. Without knowing true quality, we cannot calculate false
+positive or false negative rates---only acceptance rates. Moreover, journals do
+not randomly assign reviewers, vary the number of reviewers experimentally, or
+publish counterfactual decisions. This makes causal identification of peer
+review mechanics essentially impossible with observational data.
+
+Simulation addresses this limitation by generating papers with /known/ true
+quality, subjecting them to modeled review processes, and comparing decisions
+to ground truth. This allows direct measurement of error rates under controlled
+conditions. The cost is that results depend on modeling assumptions; the
+benefit is that we can isolate mechanisms and examine counterfactuals that
+could never be observed empirically. My approach calibrates key parameters
+(especially noise) to empirical reliability data, grounding the simulation in
+observed reviewer behavior while enabling analysis that observational data
+cannot support.
 
 ** Implementation
 
@@ -695,6 +721,12 @@ then the published literature will trend toward a narrow band of "safe"
 research that reliably clears the threshold without attempting
 excellence---exactly the pattern documented by
 cite:burtonPerceptionsAccountingAcademics2024.
+
+Importantly, this mechanism operates independently of editorial intent or
+reviewer competence. Even a journal staffed entirely by well-meaning,
+highly-qualified reviewers will exhibit convergence to mediocrity if the
+review process is sufficiently noisy. The problem is structural, not
+personnel.
 
 ** Quality vs. Volume: Incentive Implications
 
@@ -940,6 +972,12 @@ systematically misleads them.
 
 I model correlated errors by generating reviewer assessments from a
 multivariate normal distribution with correlation $\rho$ between reviewers.
+Note that this captures correlation /across reviewers/---the tendency for
+different reviewers to err in the same direction on the same paper---rather
+than correlation /within a reviewer across dimensions/ (e.g., a harsh reviewer
+being harsh on all criteria). The latter would affect how dimensions combine
+but not how reviewers aggregate; the former directly undermines the benefit of
+multiple reviewers.
 
 #+CAPTION: Effect of Correlated Reviewer Errors
 | Correlation | Reviewers | Accuracy | FNR    |
@@ -1117,6 +1155,35 @@ cite:coleChanceConsensusPeer1981. This would provide field-specific reliability
 estimates and allow journals to evaluate whether interventions actually improve
 decision quality. Without measurement, improvement is difficult.
 
+*** Summary: Why Common Intuitions Fail
+
+Several implications above may seem counterintuitive, so it is worth
+summarizing why common-sense approaches to improving peer review can backfire.
+
+/More detailed rubrics do not help./ The intuition that clearer criteria should
+improve reliability fails because each additional criterion is another
+dimension on which noise can cause rejection. AND-gating turns comprehensive
+evaluation into a liability.
+
+/Adding reviewers has sharply diminishing returns./ The intuition that more
+opinions should converge on truth fails because averaging only reduces variance
+by $1/\sqrt{n}$. Going from 2 to 10 reviewers improves accuracy by only about 9
+percentage points---often not worth the cost.
+
+/Reviewer training does not improve reliability./ The intuition that better
+training should produce better reviews fails because low reliability reflects
+fundamental uncertainty about quality, not reviewer incompetence
+(cite:hesselbergReviewerTrainingImproving2023).
+
+/Transparency does not automatically improve outcomes./ The intuition that open
+review or published referee reports should discipline reviewers fails because
+the problem is noise, not effort. Reviewers who try harder still disagree.
+
+These failures share a common root: they assume peer review is a solvable
+measurement problem rather than an inherently noisy estimation problem. Once
+this reframing is accepted, attention shifts from "fixing reviewers" to
+"designing systems that are robust to noise."
+
 ** Implications for Researchers
 
 My findings also have implications for researchers navigating the publication
@@ -1218,6 +1285,16 @@ or hurt depending on whether editors correctly identify reliable reviewers.
 I also do not model the full publication ecosystem, including resubmission
 to other journals, desk rejection, or strategic author behavior. Future work
 could extend the simulation to capture these dynamics.
+
+Finally, I model the editor as mechanically applying a conjunctive threshold,
+but real editors exercise discretion. An experienced editor may override a
+split decision, weigh one reviewer's expertise more heavily, or recognize when
+a negative review reflects taste rather than quality. Such discretion could
+partially mitigate the AND-gate effect if editors systematically correct for
+noise. However, editorial discretion could also introduce new biases, and the
+fundamental reliability problem remains: editors must still interpret noisy
+signals. The net effect of discretion is an empirical question that my
+simulation does not address.
 
 * Conclusion
 :PROPERTIES:
