@@ -1,5 +1,5 @@
 #+TITLE: Why Good Papers Get Rejected: A Simulation of Peer Review as Noisy Signal Extraction
-#+AUTHOR: [Author Name]
+#+AUTHOR: Matthew D. DeAngelis
 #+DATE: 2026
 #+OPTIONS: toc:nil num:t
 #+LATEX_CLASS: article
