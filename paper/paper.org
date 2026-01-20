@@ -182,6 +182,56 @@ causality is difficult to establish, if peer review dysfunction steers
 accounting research toward narrow, incremental contributions, this could
 partly explain the field's limited external impact.
 
+** The Research-Practice Gap
+
+Concerns about accounting research relevance have deep roots.
+cite:johnsonRelevanceLostRise1991 argued that management accounting had lost
+its relevance to practitioners, becoming divorced from the information needs
+of actual organizations. cite:kaplanAccountingScholarshipThat2011
+subsequently called for "accounting scholarship that advances professional
+knowledge and practice," arguing that the field had drifted toward technical
+exercises that fail to inform either practitioners or policymakers.
+
+More recent work has attempted to quantify this gap. cite:rajgopalIntegratingPracticeAccounting2021
+assessed accounting research against three criteria: products and processes
+produced, overlap with issues that concern CFOs and CEOs, and whether
+academic know-how exceeds that of practitioners. He concluded that academic
+research has strayed from producing work useful to either practitioners or
+policymakers, conjecturing that incentive structures---particularly the
+pressure to publish in elite journals---drive this problem.
+cite:fraserAbundantPublicationsMinuscule2020 surveyed accounting
+practitioners and found that academic research is largely ignored by the
+profession, terming the situation "abundant publications but minuscule
+impact."
+
+cite:burtonRelevanceAccountingResearch2022 developed ROAR (Relevance of
+Accounting Research) scores by having accounting professionals rate the
+titles and abstracts of published papers. The results confirmed what many
+suspected: much of what gets published in top journals is perceived as
+irrelevant by those who might apply it. Combined with the attention data
+from cite:burtonWeMatterAttention2021, these findings suggest a systematic
+disconnect between what peer review rewards and what creates value for the
+profession.
+
+** Doctoral Socialization and Methodological Narrowing
+
+A potential mechanism linking peer review dysfunction to research outcomes
+is doctoral socialization. cite:fogartyHandThatRocks2010 examined the
+American Accounting Association's Doctoral Consortium and found that "the
+most important lesson about academic accounting may have been the
+righteousness of the field's stratification hierarchy. In other words,
+learning one's place in the US academy may be more important than any theory
+or technique within academic accounting."
+
+This socialization into hierarchy rather than substance may explain why
+narrow methodologies persist despite widespread dissatisfaction. If doctoral
+students learn that success requires conforming to what elite journals
+accept, and if noisy peer review makes innovative work risky, then rational
+career management favors incremental extensions of established approaches.
+The peer review system thus perpetuates itself: new faculty adopt safe
+strategies, become reviewers who favor similar work, and train the next
+generation to do the same.
+
 ** Interventions and Training
 
 A natural question is whether peer review can be improved through training
