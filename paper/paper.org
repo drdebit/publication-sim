@@ -298,20 +298,36 @@ structural changes rather than marginal additions.
 
 ** Contributions
 
-My work makes several contributions relative to this literature. First, I
-provide an integrated framework that combines empirical reliability data
-(ICC = 0.34), multi-dimensional evaluation, conjunctive decision rules, and
-strategic researcher behavior in a single model. Second, I calibrate to
-empirical data rather than using arbitrary parameters, allowing quantitative
-predictions about error rates. Third, I derive the researcher's optimal
-response to noisy peer review and show that quantity dominates quality in
-expected publications---a prediction that matches observed behavior
-(salami-slicing, fragmentation) without requiring irrationality or bias.
-Fourth, I examine interaction effects (reviewers × noise, reviewers ×
+My work makes several contributions relative to this literature.
+
+Prior work has established that peer review reliability is low
+(cite:bornmannReliabilityGeneralizationStudyJournal2010), that chance plays a
+substantial role in funding decisions (cite:coleChanceConsensusPeer1981), and
+that simulated peer review produces high error rates
+(cite:esareyDoesPeerReview2017; cite:neffPeerReviewGame2006). I build on this
+foundation in several ways.
+
+First, I provide an /integrated/ framework that combines empirical reliability
+calibration, multi-dimensional evaluation, and conjunctive decision rules in a
+single model. Unlike cite:esareyDoesPeerReview2017, who simulates
+single-dimension review, I explicitly model the AND-gate structure of
+multi-criterion evaluation and show that it substantially amplifies error
+rates.
+
+Second, I derive /incentive implications/ from the error structure. While prior
+work documents that peer review is noisy, I show that the specific form of
+noise---conjunctive thresholds with low reliability---creates incentives
+favoring quantity over quality. This provides a structural explanation for
+observed behaviors (salami-slicing, fragmentation) that does not require
+assuming researcher irrationality or reviewer bias.
+
+Third, I examine /interaction effects/ (reviewers × noise, reviewers ×
 dimensions, threshold × noise) that reveal when interventions are most
-effective. Finally, I apply these insights specifically to accounting,
-where concerns about publication dysfunction are acute but no
-accounting-specific reliability data exists.
+effective. These interactions provide actionable guidance for journal design.
+
+Finally, I apply these insights specifically to accounting, where concerns
+about publication dysfunction are acute but systematic analysis of peer review
+mechanics is absent.
 
 * A Model of Peer Review
 :PROPERTIES:
@@ -477,6 +493,40 @@ My baseline parameters are:
 
 I then vary each parameter to examine main effects and interactions.
 
+** Design Choices and Assumptions
+
+Several modeling choices warrant explicit justification.
+
+/Dimensionality./ I use 2--4 evaluation dimensions to capture the range of
+journal practices. Two dimensions---typically "interest/contribution" and
+"execution/rigor"---represent the minimal evaluation structure common to most
+journals. Three and four dimensions capture more elaborate rubrics that
+additionally separate theoretical contribution, empirical execution, and
+writing quality. Equal weighting across dimensions is a simplifying assumption;
+in practice, editors may weight dimensions differently. However, equal
+weighting is conservative: if one dimension receives low weight but still
+operates as a binding constraint (a paper cannot be accepted with fatal
+execution flaws regardless of contribution), the AND-gate effect would be
+amplified rather than attenuated.
+
+/Symmetric thresholds./ I apply the same threshold to all dimensions. This
+simplifies analysis and reflects the intuition that journals have minimum
+standards on each criterion. Asymmetric thresholds would change the relative
+frequency of rejection reasons but not the fundamental AND-gate dynamic.
+
+/Independence across dimensions./ I assume true quality is independent across
+dimensions. In reality, quality may be positively correlated (good researchers
+produce papers that are strong on multiple dimensions). Positive correlation
+would reduce the AND-gate effect by making it less likely that a paper is
+strong on one dimension but weak on another. My independence assumption is thus
+conservative---it produces higher false rejection rates than would obtain under
+positive correlation.
+
+/Independence of reviewer errors./ My baseline assumes reviewer errors are
+independent, which I relax in the robustness analysis. As shown in Section
+[[#robustness]], correlated errors can substantially attenuate the benefit of
+additional reviewers.
+
 * Results
 :PROPERTIES:
 :CUSTOM_ID: results
@@ -578,12 +628,80 @@ probability is roughly 25% regardless of noise level. This means borderline
 papers face a coin-flip regardless of system reliability, while the benefit
 of writing excellent work is dramatically eroded by noise.
 
-** Quality vs. Volume: Perverse Incentives
+*** The Threshold as Crossover Point
 
-My simulation reveals that the noisy structure of peer review creates
-incentives favoring quantity over quality. I compare four hypothetical
-strategies for a researcher with fixed total effort (at threshold = 70, 2
-reviewers, noise SD = 30):
+To understand this redistribution more precisely, I examine how the effect of
+noise varies across the full quality spectrum.
+
+#+CAPTION: Noise effect by quality level: positive delta indicates noise helps
+| Quality | P(Low Noise) | P(High Noise) |  Delta | Effect  |
+|---------+--------------+---------------+--------+---------|
+|      50 |         0.1% |          6.9% |  +6.8% | Helps   |
+|      58 |         1.6% |         12.7% | +11.0% | Helps   |
+|      64 |         7.0% |         18.3% | +11.2% | Helps   |
+|      70 |        24.7% |         25.2% |  +0.5% | Neutral |
+|      76 |        50.4% |         33.6% | -16.8% | Hurts   |
+|      84 |        81.1% |         45.5% | -35.6% | Hurts   |
+|      90 |        94.4% |         53.3% | -41.1% | Hurts   |
+
+The threshold acts as a precise crossover point. Below threshold, noise
+provides "lottery tickets"---random chances to be pushed above the acceptance
+bar. The maximum benefit occurs around 6--12 points below threshold (quality
+58--64), where high noise increases acceptance probability by approximately 11
+percentage points. Above threshold, noise is purely destructive, with the
+damage increasing with quality: excellent papers (quality 90) lose over 40
+percentage points of acceptance probability when noise is high.
+
+This asymmetry has a simple interpretation: noise creates variance around true
+quality. For papers below threshold, upward variance helps (acceptance) while
+downward variance doesn't matter (rejection either way). For papers above
+threshold, downward variance hurts (rejection) while upward variance doesn't
+matter (acceptance either way). The net effect is redistribution from good to
+mediocre.
+
+*** Convergence to Mediocrity
+
+This redistribution has a profound implication: noise pulls the /published/
+literature toward mediocrity from both ends of the quality distribution.
+
+Noise does not change true quality---it changes /observed/ quality. When
+reviewers add noise to their assessments, some excellent papers are observed as
+merely good (and rejected), while some mediocre papers are observed as
+acceptable (and published). The threshold acts as an attractor: with sufficient
+noise, acceptance rates across quality levels converge toward whatever baseline
+rate exists at the threshold.
+
+Consider the compression in acceptance rates under high noise:
+- Quality 90 → 53% acceptance (down from 94% with low noise)
+- Quality 50 → 7% acceptance (up from 0.1% with low noise)
+
+The ratio of acceptance rates shrinks from 940:1 to merely 8:1. In other words,
+high noise dramatically weakens the correlation between true quality and
+publication. The published literature becomes less representative of actual
+quality differences and more representative of luck.
+
+An observer examining only published papers would see a narrower quality
+distribution than actually exists in submissions---the tails are truncated from
+both ends. Excellent papers that deserved publication are missing (rejected due
+to unlucky reviewer draws), while mediocre papers that should have been
+filtered out are present (accepted due to lucky draws). The published record
+thus /systematically underrepresents/ the true variance in research quality.
+
+This convergence to mediocrity may partly explain why top journals are
+perceived as publishing increasingly similar work. If noise compresses the
+quality distribution of accepted papers, and if reviewers from similar
+methodological backgrounds add correlated noise (see Section [[#robustness]]),
+then the published literature will trend toward a narrow band of "safe"
+research that reliably clears the threshold without attempting
+excellence---exactly the pattern documented by
+cite:burtonPerceptionsAccountingAcademics2024.
+
+** Quality vs. Volume: Incentive Implications
+
+The noisy structure of peer review creates incentive structures that may favor
+quantity over quality. To explore this implication, I compare expected
+publications under four hypothetical strategies for a researcher with fixed
+total effort (at threshold = 70, 2 reviewers, noise SD = 30):
 
 #+CAPTION: Strategy Comparison: Quality vs. Volume
 | Strategy       | Papers | Quality | P(Accept) | E[Publications] |
@@ -598,27 +716,68 @@ reviewers, noise SD = 30):
 #+ATTR_LATEX: :width 0.8\textwidth :placement [htbp]
 [[file:figures/strategy-comparison.pdf]]
 
-The "two very good" strategy dominates "one excellent" by 46% in expected
-publications, despite producing lower-quality work. This occurs because the
-stochastic nature of acceptance rewards multiple attempts. Even if each
+Under these parameters, the "two very good" strategy yields 46% higher expected
+publications than "one excellent," despite producing lower-quality work. This
+occurs because stochastic acceptance rewards multiple attempts: even if each
 individual paper has lower acceptance probability, the portfolio effect of
 multiple submissions increases expected output.
 
-This finding helps explain several observed phenomena in accounting
-research:
+*** Does the Lottery Ticket Strategy Work?
+
+Given that noise helps below-threshold papers, a natural question arises: could
+a researcher maximize expected publications by producing /many/ mediocre papers,
+treating each as a lottery ticket? I extend the strategy comparison to include
+below-threshold quality levels.
+
+#+CAPTION: Extended Strategy Comparison (including below-threshold papers)
+| Strategy         | Papers | Quality | P(Accept) | E[Pubs] | vs. Threshold |
+|------------------+--------+---------+-----------+---------+---------------|
+| Two very good    |      2 |      80 |     45.5% |    0.91 | Above         |
+| Two good         |      2 |      75 |     35.0% |    0.70 | Above         |
+| One excellent    |      1 |      90 |     69.8% |    0.70 | Above         |
+| Four decent      |      4 |      65 |     15.8% |    0.63 | Below         |
+| Four mediocre    |      4 |      55 |      5.0% |    0.20 | Below         |
+| Eight poor       |      8 |      45 |      1.2% |    0.10 | Below         |
+| Sixteen lottery  |     16 |      35 |      0.2% |    0.03 | Below         |
+
+The results reveal a non-linear relationship. The "lottery ticket" strategy
+fails: acceptance probability drops faster than paper count increases. Sixteen
+papers at quality 35 yield only 0.03 expected publications, far below one
+excellent paper (0.70).
+
+However, the results also reveal that /slightly/ below-threshold papers can
+compete with excellent ones. Four papers at quality 65 (five points below
+threshold) yield 0.63 expected publications---only 10% less than one excellent
+paper at quality 90. This suggests a "near-miss" region where the lottery
+effect is meaningful but not dominant.
+
+The optimal strategy remains firmly above threshold: "two very good" papers at
+quality 80 dominate all alternatives by a wide margin (0.91 expected
+publications). The key insight is that researchers should aim for the /lowest
+quality that reliably clears the threshold/, not the highest quality possible.
+Excess quality above threshold provides diminishing returns, while quality
+below threshold wastes effort on long-shot lottery tickets.
+
+*** Implications for Researcher Behavior
+
+If researchers respond rationally to these incentives, this would help explain
+several observed phenomena in accounting research:
 - The prevalence of "salami-slicing" (fragmenting research into minimal
   publishable units)
 - Field wisdom to "write twice as many papers as you think you need"
 - The trend toward more incremental contributions noted by
   cite:burtonPerceptionsAccountingAcademics2024
+- The observation that most papers aim for "good enough" rather than
+  "exceptional"
 
-The incentive structure I document may also discourage scientific
-risk-taking. cite:azoulayDoesPeerReview2025 provide evidence that peer
-review penalizes researchers who pursue bold, unconventional work. My
-simulation suggests a mechanism: innovative research may face higher
-variance in reviewer assessments (less consensus on what "good" looks like),
-amplifying the AND-gate effect and making conservative, incremental work
-relatively more attractive.
+I do not model researcher behavior directly---the simulation calculates
+acceptance probabilities, not equilibrium strategies. However, the incentive
+structure implied by these probabilities is consistent with
+cite:azoulayDoesPeerReview2025, who provide evidence that peer review penalizes
+researchers who pursue bold, unconventional work. If innovative research faces
+higher variance in reviewer assessments (less consensus on what "good" looks
+like), the AND-gate effect would be amplified, making conservative, incremental
+work relatively more attractive in expected value terms.
 
 ** Interaction: Reviewers Help More When Noise Is High
 

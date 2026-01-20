@@ -701,3 +701,115 @@
         :false-negative-rate (avg :false-negative-rate)
         :false-positive-rate (avg :false-positive-rate)
         :accuracy (avg :accuracy)}))))
+
+;; =============================================================================
+;; Extended Strategy Analysis: Full Quality Spectrum
+;; =============================================================================
+
+(defn acceptance-probability-at-quality
+  "Calculate acceptance probability for a paper of given quality.
+   Runs num-trials simulations to estimate probability."
+  [quality {:keys [num-reviewers reviewer-noise-sd threshold dimensions]
+            :as config}
+   num-trials]
+  (let [papers (vec (repeatedly num-trials
+                                #(hash-map
+                                  :pid (str (java.util.UUID/randomUUID))
+                                  :true-quality (into {}
+                                                      (map (fn [d] [d quality])
+                                                           dimensions)))))
+        results (map #(review-paper % config) papers)
+        accepted (count (filter :decision results))]
+    (/ (double accepted) num-trials)))
+
+(defn experiment-full-quality-spectrum
+  "Extended analysis: Acceptance probability across full quality spectrum.
+
+   Includes quality levels BELOW threshold to show how noise affects
+   mediocre papers vs. good papers. Key insight: noise HELPS papers below
+   threshold by giving them lottery tickets to acceptance.
+
+   Returns acceptance probability at each quality level for different noise."
+  [& {:keys [quality-levels noise-levels threshold num-trials]
+      :or {quality-levels [40 45 50 55 60 65 70 75 80 85 90]
+           noise-levels [15 30 45]
+           threshold 70
+           num-trials 2000}}]
+  (vec
+   (for [noise noise-levels
+         quality quality-levels]
+     (let [config (merge default-config {:reviewer-noise-sd noise
+                                         :threshold threshold})
+           p-accept (acceptance-probability-at-quality quality config num-trials)]
+       {:quality quality
+        :noise-sd noise
+        :threshold threshold
+        :acceptance-probability p-accept
+        :below-threshold? (< quality threshold)}))))
+
+(defn experiment-extended-strategies
+  "Compare strategies across full quality spectrum including mediocre papers.
+
+   Key question: Is there a point where producing MANY mediocre papers
+   (lottery ticket strategy) could dominate producing fewer good papers?
+
+   Fixed effort assumption: effort = quality × papers
+   E.g., 100 effort units could produce:
+   - 1 paper at quality 100
+   - 2 papers at quality 50
+   - 4 papers at quality 25
+   - etc."
+  [& {:keys [effort-budget threshold noise-sd num-trials]
+      :or {effort-budget 160
+           threshold 70
+           noise-sd 30
+           num-trials 2000}}]
+  (let [config (merge default-config {:reviewer-noise-sd noise-sd
+                                      :threshold threshold})
+        ;; Define strategies as [papers, quality] pairs
+        ;; Effort = papers × quality, so papers = effort / quality
+        strategies [{:name "One excellent"      :papers 1 :quality 90}
+                    {:name "Two very good"      :papers 2 :quality 80}
+                    {:name "Two good"           :papers 2 :quality 75}
+                    {:name "Four decent"        :papers 4 :quality 65}
+                    {:name "Four mediocre"      :papers 4 :quality 55}
+                    {:name "Eight poor"         :papers 8 :quality 45}
+                    {:name "Sixteen lottery"    :papers 16 :quality 35}]]
+    (vec
+     (for [{:keys [name papers quality]} strategies]
+       (let [p-accept (acceptance-probability-at-quality quality config num-trials)
+             expected-pubs (* papers p-accept)]
+         {:strategy name
+          :papers papers
+          :quality quality
+          :below-threshold? (< quality threshold)
+          :p-accept p-accept
+          :expected-publications expected-pubs})))))
+
+(defn experiment-noise-crossover
+  "Find the quality level where noise changes from hurting to helping.
+
+   Above threshold: higher noise REDUCES acceptance probability
+   Below threshold: higher noise INCREASES acceptance probability
+   At threshold: noise has minimal effect
+
+   This shows noise redistributes acceptance from good to mediocre papers."
+  [& {:keys [quality-levels threshold num-trials]
+      :or {quality-levels (range 50 91 2)
+           threshold 70
+           num-trials 3000}}]
+  (let [config-low (merge default-config {:reviewer-noise-sd 15 :threshold threshold})
+        config-high (merge default-config {:reviewer-noise-sd 45 :threshold threshold})]
+    (vec
+     (for [quality quality-levels]
+       (let [p-low (acceptance-probability-at-quality quality config-low num-trials)
+             p-high (acceptance-probability-at-quality quality config-high num-trials)
+             delta (- p-high p-low)]
+         {:quality quality
+          :p-accept-low-noise p-low
+          :p-accept-high-noise p-high
+          :delta delta  ; positive = noise helps, negative = noise hurts
+          :noise-effect (cond
+                          (> delta 0.02) :helps
+                          (< delta -0.02) :hurts
+                          :else :neutral)})))))
