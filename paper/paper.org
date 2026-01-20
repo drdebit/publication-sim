@@ -327,9 +327,16 @@ Third, I examine /interaction effects/ (reviewers × noise, reviewers ×
 dimensions, threshold × noise) that reveal when interventions are most
 effective. These interactions provide actionable guidance for journal design.
 
-Finally, I apply these insights specifically to accounting, where concerns
-about publication dysfunction are acute but systematic analysis of peer review
-mechanics is absent.
+Finally, I calibrate to /accounting-specific institutional features/ that
+amplify these problems relative to other fields. Accounting journals typically
+use only 1--2 reviewers (compared to 3--5 in natural sciences), employ
+conjunctive rubrics across multiple criteria, and maintain high selectivity.
+This combination is particularly damaging: few reviewers means noise does not
+average out, conjunctive rubrics create multiple failure points, and high
+selectivity concentrates decisions in the region where noise matters most. The
+result is that accounting's institutional structure may produce higher false
+rejection rates than fields with more reviewers or compensatory decision rules,
+even at identical underlying reliability.
 
 * A Model of Peer Review
 :PROPERTIES:
@@ -587,6 +594,15 @@ odds of acceptance. My simulation provides a mechanism for this finding:
 the combination of low inter-rater reliability and multi-dimensional
 evaluation.
 
+The single-reviewer case (n = 1) deserves particular attention because JAR and
+JAE frequently use only one reviewer. With a single reviewer, FNR rises to
+52%---meaning that /more than half/ of deserving papers are rejected based on
+one person's noisy assessment. The 6.9 percentage point improvement from adding
+a second reviewer represents the largest marginal gain in the table, yet these
+journals have chosen speed over accuracy. This institutional choice has
+consequences: at identical true quality, a paper's fate at a single-reviewer
+journal is substantially more random than at a two-reviewer journal.
+
 ** The AND-Gate Effect: Dimensions Amplify Errors
 
 #+CAPTION: Effect of Evaluation Dimensions (AND-gating)
@@ -802,14 +818,23 @@ several observed phenomena in accounting research:
 - The observation that most papers aim for "good enough" rather than
   "exceptional"
 
-I do not model researcher behavior directly---the simulation calculates
-acceptance probabilities, not equilibrium strategies. However, the incentive
-structure implied by these probabilities is consistent with
-cite:azoulayDoesPeerReview2025, who provide evidence that peer review penalizes
-researchers who pursue bold, unconventional work. If innovative research faces
-higher variance in reviewer assessments (less consensus on what "good" looks
-like), the AND-gate effect would be amplified, making conservative, incremental
-work relatively more attractive in expected value terms.
+A methodological note: I do not model researcher behavior directly. The
+simulation calculates acceptance probabilities at different quality levels,
+not equilibrium strategies that account for effort costs, career dynamics,
+co-authorship, or multi-period optimization. The strategy comparison should
+therefore be interpreted as /comparative statics/---showing how expected
+publications vary with quality and quantity choices---rather than as
+predictions about actual researcher behavior. A full equilibrium model would
+require additional assumptions about effort costs and researcher heterogeneity
+that are beyond this paper's scope.
+
+That said, the incentive gradients I document are consistent with observed
+behavior and with cite:azoulayDoesPeerReview2025, who provide evidence that
+peer review penalizes researchers who pursue bold, unconventional work. If
+innovative research faces higher variance in reviewer assessments (less
+consensus on what "good" looks like), the AND-gate effect would be amplified,
+making conservative, incremental work relatively more attractive in expected
+value terms.
 
 ** Interaction: Reviewers Help More When Noise Is High
 
@@ -1004,16 +1029,38 @@ yields essentially no improvement (75.2% to 75.5%).
 This occurs because correlated errors do not average out. If all reviewers are
 biased in the same direction---perhaps sharing a methodological worldview that
 disadvantages certain research approaches---adding more reviewers from the same
-pool merely confirms the shared bias. This finding has implications for
-reviewer selection: diversity in reviewer backgrounds may be more valuable than
-additional reviewers from similar backgrounds.
+pool merely confirms the shared bias.
 
-The accounting context makes correlated errors plausible. If doctoral programs
-train students in similar methodologies and socialize them into similar views
-of "good" research (cite:fogartyHandThatRocks2010), reviewers may share
-systematic biases even without communicating. My finding suggests that
-meaningful improvement requires not just more reviewers but /differently
-trained/ reviewers.
+However, the empirical evidence from accounting suggests that reviewer
+/disagreement/, not agreement, is the dominant pattern. If reviewers shared
+systematic biases (high correlation), we would expect quick decisions: both
+reviewers agree to accept or reject, and the process concludes rapidly.
+Instead, we observe the opposite. Accounting journals have longer times to
+publication than comparable journals in other fields despite using fewer
+reviewers (cite:woodComparingPublicationProcess2016). Papers routinely go
+through multiple revision rounds as authors attempt to satisfy divergent
+reviewer demands. Management Science found it necessary to impose an explicit
+two-round limit to prevent excessive iterations---a policy that would be
+unnecessary if reviewers typically agreed. Papers rejected at one journal are
+often accepted at another with different reviewers, suggesting the original
+rejection reflected reviewer-specific views rather than consensus about
+quality.
+
+This pattern is consistent with my baseline assumption of independent errors.
+The low ICC reported by cite:bornmannReliabilityGeneralizationStudyJournal2010
+is not measurement error in the traditional sense---noise that could be reduced
+with better instruments. Rather, it reflects genuine lack of consensus about
+what constitutes quality. Reviewers hold fundamentally different views about
+what makes a paper good, leading to the contradictory demands and extended
+review processes that characterize the field.
+
+The correlated-errors analysis above should therefore be interpreted as a
+/counterfactual/: what would happen if reviewers did agree? The answer is that
+adding reviewers would provide little benefit---but also that decisions would
+be faster and more consistent. The fact that we observe slow, inconsistent
+decisions suggests the independent-errors baseline is the empirically relevant
+case. My main results, which assume independent errors, are thus grounded in
+observed reviewer behavior.
 
 ** Sensitivity to Quality Variance
 
@@ -1064,6 +1111,23 @@ specific effects, but the fundamental tension between selectivity and
 reliability remains.
 
 ** Summary of Robustness Findings
+
+To provide a sense of plausible bounds, I summarize results under optimistic
+and pessimistic assumptions:
+
+#+CAPTION: Plausible Bounds on False Negative Rate
+| Scenario    | ICC  | τ  | Reviewers | FNR   | Interpretation                         |
+|-------------+------+----+-----------+-------+----------------------------------------|
+| Optimistic  | 0.50 | 30 |         3 | ~28%  | High reliability, quality variance     |
+| Baseline    | 0.34 | 20 |         2 | ~45%  | Calibrated to Bornmann et al.          |
+| Pessimistic | 0.20 | 15 |         1 | ~55%  | Low reliability, single reviewer       |
+| Accounting  | 0.34 | 20 |         1 | ~52%  | JAR/JAE single-reviewer model          |
+
+Even under optimistic assumptions, more than one-quarter of deserving papers
+are rejected. Under the single-reviewer model used by some accounting journals,
+the majority of deserving papers face rejection. The baseline estimate of ~45%
+should be interpreted as a central estimate within a range of roughly 28--55%
+depending on institutional features and true reliability.
 
 Across sensitivity analyses, several findings are robust:
 
