@@ -551,9 +551,11 @@ frequency of rejection reasons but not the fundamental AND-gate dynamic.
 dimensions. In reality, quality may be positively correlated (good researchers
 produce papers that are strong on multiple dimensions). Positive correlation
 would reduce the AND-gate effect by making it less likely that a paper is
-strong on one dimension but weak on another. My independence assumption is thus
-conservative---it produces higher false rejection rates than would obtain under
-positive correlation.
+strong on one dimension but weak on another. Simulation with modest positive
+correlation ($\rho_{dim} = 0.4$) suggests that baseline FNR would fall from
+approximately 45% to approximately 38%---still substantial, but attenuated. My
+independence assumption is thus conservative---it produces higher false
+rejection rates than would obtain under positive correlation.
 
 /Independence of reviewer errors./ My baseline assumes reviewer errors are
 independent, which I relax in the robustness analysis. As shown in Section
@@ -1412,9 +1414,14 @@ Third, my model treats quality as exogenous, but in reality researchers choose
 how to allocate effort. An equilibrium model in which researchers optimally
 respond to publication incentives, and in which those responses affect the
 distribution of submitted quality, could reveal feedback effects I do not
-capture. If noisy review induces quantity-over-quality strategies, the
-resulting submissions may be more homogeneous in quality, which my sensitivity
-analysis suggests would /increase/ false rejection rates.
+capture. This feedback loop could be self-reinforcing: if noisy review induces
+quantity-over-quality strategies, the resulting submissions become more
+homogeneous in quality (lower $\tau$), which my sensitivity analysis suggests
+would /increase/ false rejection rates, which would further strengthen
+incentives for quantity over quality. The system could thus converge to a
+low-quality, high-noise equilibrium even if it began with higher-quality
+submissions. Modeling this dynamic would require combining my simulation
+framework with an equilibrium model of researcher behavior.
 
 Fourth, comparative analysis across fields could test whether accounting's
 institutional features---few reviewers, long review times, high rejection
