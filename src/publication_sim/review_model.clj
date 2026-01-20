@@ -494,3 +494,210 @@
                               num-runs)
             :threshold thresh
             :noise-sd noise))))
+
+;; =============================================================================
+;; Robustness/Sensitivity Analysis Experiments
+;; =============================================================================
+
+(defn median
+  "Calculate median of a sequence of numbers."
+  [coll]
+  (let [sorted (sort coll)
+        n (count sorted)
+        mid (quot n 2)]
+    (if (odd? n)
+      (nth sorted mid)
+      (/ (+ (nth sorted (dec mid)) (nth sorted mid)) 2.0))))
+
+(defn aggregate-reviewer-observations-median
+  "Aggregate multiple reviewers' observations using MEDIAN instead of mean.
+   More robust to outlier reviewers."
+  [true-quality num-reviewers noise-sd]
+  (let [observations (repeatedly num-reviewers
+                                 #(reviewer-observation true-quality noise-sd))
+        dimensions (keys true-quality)]
+    (into {}
+          (map (fn [dim]
+                 [dim (median (map #(get % dim) observations))])
+               dimensions))))
+
+(defn review-paper-with-aggregation
+  "Review paper using specified aggregation method (:mean or :median)."
+  [paper {:keys [num-reviewers reviewer-noise-sd threshold dimensions
+                 aggregation-method] :as config}]
+  (let [true-quality (:true-quality paper)
+        agg-fn (case (or aggregation-method :mean)
+                 :mean aggregate-reviewer-observations
+                 :median aggregate-reviewer-observations-median)
+        observed-quality (agg-fn true-quality num-reviewers reviewer-noise-sd)
+        decision (editor-decision observed-quality threshold dimensions)
+        should-accept (true-decision true-quality threshold dimensions)
+        outcome (cond
+                  (and decision should-accept)       :true-positive
+                  (and decision (not should-accept)) :false-positive
+                  (and (not decision) should-accept) :false-negative
+                  :else                              :true-negative)]
+    (assoc paper
+           :observed-quality observed-quality
+           :decision decision
+           :should-accept should-accept
+           :outcome outcome)))
+
+(defn run-experiment-with-aggregation
+  "Run experiment with specified aggregation method."
+  [config]
+  (let [merged-config (merge default-config config)
+        papers (generate-papers merged-config)
+        results (map #(review-paper-with-aggregation % merged-config) papers)]
+    (analyze results merged-config)))
+
+(defn experiment-aggregation-method
+  "Robustness: Compare mean vs median aggregation of reviewer scores.
+   Median is more robust to outlier reviewers but may be less efficient."
+  [& {:keys [reviewer-counts num-runs]
+      :or {reviewer-counts [2 3 5]
+           num-runs 10}}]
+  (vec
+   (for [method [:mean :median]
+         n reviewer-counts]
+     (let [runs (repeatedly num-runs
+                            #(run-experiment-with-aggregation
+                              {:num-reviewers n
+                               :aggregation-method method}))
+           avg (fn [k] (/ (reduce + (map k runs)) num-runs))]
+       {:aggregation-method method
+        :num-reviewers n
+        :false-negative-rate (avg :false-negative-rate)
+        :false-positive-rate (avg :false-positive-rate)
+        :accuracy (avg :accuracy)}))))
+
+(defn experiment-quality-variance
+  "Robustness: Sensitivity to variance in true quality (tau).
+   Our calibration assumes tau=20. What if tau=15 or tau=25?"
+  [& {:keys [quality-sds num-runs]
+      :or {quality-sds [15 20 25 30]
+           num-runs 10}}]
+  (vec
+   (for [sd quality-sds]
+     (let [runs (repeatedly num-runs
+                            #(run-experiment {:quality-sd sd}))
+           avg (fn [k] (/ (reduce + (map k runs)) num-runs))
+           ;; Calculate implied ICC: tau^2 / (tau^2 + sigma^2)
+           ;; where sigma = 30 (our calibrated noise)
+           implied-icc (/ (* sd sd) (+ (* sd sd) (* 30 30)))]
+       {:quality-sd sd
+        :implied-icc implied-icc
+        :false-negative-rate (avg :false-negative-rate)
+        :false-positive-rate (avg :false-positive-rate)
+        :accuracy (avg :accuracy)}))))
+
+(defn correlated-reviewer-observations
+  "Generate reviewer observations with correlated errors.
+   Models reviewers from the same 'school' who share biases.
+
+   correlation: proportion of noise that is shared (0 = independent, 1 = identical)"
+  [true-quality num-reviewers noise-sd correlation]
+  (let [;; Shared noise component (same for all reviewers)
+        shared-noise-sd (* noise-sd (Math/sqrt correlation))
+        shared-noise (into {}
+                          (map (fn [[dim _]]
+                                 [dim (r/grand 0 shared-noise-sd)])
+                               true-quality))
+        ;; Independent noise component (different per reviewer)
+        indep-noise-sd (* noise-sd (Math/sqrt (- 1 correlation)))
+        observations (repeatedly num-reviewers
+                                 (fn []
+                                   (into {}
+                                         (map (fn [[dim true-val]]
+                                                [dim (+ true-val
+                                                        (get shared-noise dim)
+                                                        (r/grand 0 indep-noise-sd))])
+                                              true-quality))))
+        dimensions (keys true-quality)]
+    ;; Average the observations
+    (into {}
+          (map (fn [dim]
+                 [dim (/ (reduce + (map #(get % dim) observations))
+                         num-reviewers)])
+               dimensions))))
+
+(defn review-paper-correlated
+  "Review paper with correlated reviewer errors."
+  [paper {:keys [num-reviewers reviewer-noise-sd threshold dimensions
+                 reviewer-correlation] :as config}]
+  (let [true-quality (:true-quality paper)
+        observed-quality (correlated-reviewer-observations
+                          true-quality
+                          num-reviewers
+                          reviewer-noise-sd
+                          (or reviewer-correlation 0))
+        decision (editor-decision observed-quality threshold dimensions)
+        should-accept (true-decision true-quality threshold dimensions)
+        outcome (cond
+                  (and decision should-accept)       :true-positive
+                  (and decision (not should-accept)) :false-positive
+                  (and (not decision) should-accept) :false-negative
+                  :else                              :true-negative)]
+    (assoc paper
+           :observed-quality observed-quality
+           :decision decision
+           :should-accept should-accept
+           :outcome outcome)))
+
+(defn run-experiment-correlated
+  "Run experiment with correlated reviewer errors."
+  [config]
+  (let [merged-config (merge default-config config)
+        papers (generate-papers merged-config)
+        results (map #(review-paper-correlated % merged-config) papers)]
+    (analyze results merged-config)))
+
+(defn experiment-correlated-errors
+  "Robustness: Effect of correlated reviewer errors.
+   When reviewers share methodological biases, their errors don't average out.
+
+   correlation=0: independent errors (baseline)
+   correlation=0.5: moderate shared bias
+   correlation=0.8: strong shared bias (e.g., same methodological school)"
+  [& {:keys [correlations reviewer-counts num-runs]
+      :or {correlations [0 0.25 0.5 0.75]
+           reviewer-counts [2 3 5]
+           num-runs 10}}]
+  (vec
+   (for [corr correlations
+         n reviewer-counts]
+     (let [runs (repeatedly num-runs
+                            #(run-experiment-correlated
+                              {:num-reviewers n
+                               :reviewer-correlation corr}))
+           avg (fn [k] (/ (reduce + (map k runs)) num-runs))]
+       {:correlation corr
+        :num-reviewers n
+        :false-negative-rate (avg :false-negative-rate)
+        :false-positive-rate (avg :false-positive-rate)
+        :accuracy (avg :accuracy)}))))
+
+(defn experiment-icc-sensitivity
+  "Robustness: Sensitivity to ICC calibration.
+   We calibrate to ICC=0.34 (sigma=30 with tau=20).
+   What if true ICC is 0.25 or 0.45?
+
+   ICC = tau^2 / (tau^2 + sigma^2)
+   Solving for sigma: sigma = tau * sqrt((1-ICC)/ICC)"
+  [& {:keys [icc-values tau num-runs]
+      :or {icc-values [0.20 0.25 0.30 0.34 0.40 0.45 0.50]
+           tau 20
+           num-runs 10}}]
+  (vec
+   (for [icc icc-values]
+     (let [;; Calculate noise SD that yields this ICC
+           sigma (* tau (Math/sqrt (/ (- 1 icc) icc)))
+           runs (repeatedly num-runs
+                            #(run-experiment {:reviewer-noise-sd sigma
+                                              :quality-sd tau}))
+           avg (fn [k] (/ (reduce + (map k runs)) num-runs))]
+       {:icc icc
+        :implied-noise-sd sigma
+        :false-negative-rate (avg :false-negative-rate)
+        :false-positive-rate (avg :false-positive-rate)
+        :accuracy (avg :accuracy)}))))
