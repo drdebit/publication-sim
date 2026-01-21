@@ -7,8 +7,10 @@
 **Simulation Approach:** Agent-based model where papers have true quality on multiple dimensions (interest, rigor, contribution), reviewers observe with measurement noise (calibrated to ICC=0.34), and acceptance requires passing conjunctive thresholds on all dimensions.
 
 **Key Findings from Simulation:**
-- At top journal selectivity levels, 52% of truly excellent papers are falsely rejected due to measurement error
-- Researchers maximize expected publications by writing multiple "very good" papers (0.804 expected pubs) rather than single "excellent" papers (0.571 expected pubs)
+- At top journal selectivity levels, ~45% of deserving papers are falsely rejected due to measurement error (baseline: 2 reviewers, ICC=0.34)
+- Plausible bounds: 28-55% FNR depending on assumptions; single-reviewer journals (JAR/JAE): ~52%
+- Researchers maximize expected publications by writing multiple "very good" papers rather than single "excellent" papers
+- "Convergence to mediocrity": noise compresses published quality distribution from both ends
 - This explains salami-slicing, the "write twice as many papers" advice, and why incremental research dominates
 
 ---
@@ -234,7 +236,7 @@ These papers appeared in Elicit reports but could not be independently verified.
 - Neff & Olden (2006): 25-50% unsuitable papers accepted
 - Esarey (2017): Coin-flip odds at 80th percentile
 - Cole et al. (1981): Funding depends on which reviewers are selected
-- Quantified error rates remarkably consistent with simulation results (52% false negatives)
+- Quantified error rates remarkably consistent with simulation results (~45% false negatives at baseline, 28-55% plausible range)
 
 ### §2.4 Multi-dimensional Evaluation & Consensus
 - Bornmann et al.: Multi-dimensional systems associated with LOWER IRR
@@ -258,17 +260,17 @@ These papers appeared in Elicit reports but could not be independently verified.
 
 ## Section 8: Key Contributions of Your Work
 
-1. **Quantitative Integration:** No prior work shows ICC=0.34 + 2 dimensions + conjunctive threshold + threshold=70 → 52% false negative rate
+1. **Quantitative Integration:** No prior work shows ICC=0.34 + 2 dimensions + conjunctive threshold → ~45% false negative rate (28-55% plausible bounds)
 
-2. **Expected Value Formalization:** First to show why volume beats quality with actual numbers (0.804 vs 0.571 expected pubs)
+2. **Expected Value Formalization:** First to show why volume beats quality with formal expected value analysis
 
 3. **Mechanism Explanation:** Shows WHY "50% rule" exists—predictable consequence of measurement theory + multi-dimensional conjunctive rules
 
-4. **Accounting-Specific Application:** First to apply these insights to accounting (no accounting-specific reliability data exists)
+4. **Accounting-Specific Application:** First to apply these insights to accounting (no accounting-specific reliability data exists); highlights single-reviewer model (JAR/JAE) yields ~52% FNR
 
-5. **Validation Against Field Wisdom:** "Write twice as many papers" anecdote perfectly validates 52% false negative prediction
+5. **Convergence to Mediocrity:** Novel finding that noise compresses published quality from both ends—helping below-threshold papers while hurting above-threshold papers
 
-6. **Resource Inequality Implications:** Shows how volume strategies favor well-resourced institutions
+6. **Independent Errors as Baseline:** Reframes correlated errors as counterfactual; empirical evidence (long review times, multiple rounds, contradictory demands) supports disagreement as the realistic baseline
 
 ---
 
@@ -278,7 +280,7 @@ These papers appeared in Elicit reports but could not be independently verified.
 >
 > These patterns raise fundamental questions about whether the peer review process is functioning effectively. This paper provides a potential explanation grounded in measurement theory: the statistical properties of peer review—specifically, low inter-rater reliability (ICC ≈ 0.34; Bornmann et al. 2010) combined with multi-dimensional conjunctive evaluation criteria—may produce systematic dysfunction that disadvantages quality research and incentivizes suboptimal publication strategies.
 >
-> Using an agent-based simulation calibrated to empirical reliability data, we demonstrate that at realistic selectivity levels, approximately 52% of truly excellent papers are falsely rejected due to measurement error alone. This finding validates field wisdom that good papers have roughly a 50% chance of acceptance at top journals. More troublingly, we show that this error structure creates perverse incentives: researchers maximize expected publications by producing multiple 'very good' papers rather than single 'excellent' papers, explaining the prevalence of incremental research and 'salami-slicing' strategies documented in the literature."
+> Using a simulation calibrated to empirical reliability data (ICC = 0.34), I demonstrate that at realistic selectivity levels, approximately 45% of deserving papers are rejected due to measurement error alone. This finding validates field wisdom that good papers have roughly a 50% chance of acceptance at top journals. More troublingly, I show that this error structure creates perverse incentives: researchers maximize expected publications by producing multiple 'very good' papers rather than single 'excellent' papers, explaining the prevalence of incremental research documented in the literature."
 
 ---
 
@@ -309,16 +311,21 @@ These papers appeared in Elicit reports but could not be independently verified.
 ### Reviews/Context
 13. Tennant, J.P., & Ross-Hellauer, T. (2020). The limitations to our understanding of peer review. *Research Integrity and Peer Review*, 5, 6.
 
+### Additional Sources (Added During Revision)
+14. Azoulay, P., et al. (2025). Does peer review identify scientific merit? *Science* (forthcoming). Evidence that peer review identifies merit but with substantial noise.
+15. Fogarty, T.J. (2010). The hand that rocks the cradle. Doctoral socialization and academic values.
+16. Kaplan, R.S. (2011). Accounting scholarship that advances professional knowledge. *The Accounting Review*.
+17. Rajgopal, S. (2021). Integrating practice into accounting research. *Management Science*.
+18. Fraser, H., et al. (2020). Abundant publications, minuscule impact. Practice relevance concerns.
+
 ---
 
-## Section 11: Target Outlets
+## Section 11: Target Outlet
 
-Based on the translational nature of this research:
-- **Primary:** *Accounting Horizons* (bridges research and practice, Wood is on editorial board)
-- **Secondary:** *Issues in Accounting Education* (has published Wood's survey work)
-- **Alternative:** *Contemporary Accounting Research* (if framed more theoretically)
+- **Primary:** *The Accounting Review* (TAR) - flagship journal, appropriate for methodological contribution with broad implications for the field
 
 ---
 
 *Document prepared: January 2026*
-*For use with Claude Code in drafting peer review reliability simulation paper*
+*Last updated: January 2026*
+*For use with Claude Code in drafting peer review reliability simulation paper for The Accounting Review*

@@ -1,44 +1,59 @@
-# publication-sim
+# Peer Review Simulation
 
-FIXME: description
+A Clojure simulation studying peer review as a noisy signal extraction problem, demonstrating how low inter-rater reliability combined with multi-dimensional conjunctive evaluation creates systematic dysfunction in academic publishing.
 
-## Installation
+## Key Findings
 
-Download from http://example.com/FIXME.
+- **~45% false negative rate** at baseline (2 reviewers, ICC=0.34, 80th percentile threshold)
+- **Plausible bounds: 28-55%** depending on assumptions
+- **Single-reviewer journals: ~52%** (relevant for JAR/JAE model)
+- **Volume beats quality**: Researchers maximize expected publications with multiple moderate-quality papers rather than single excellent papers
+- **Convergence to mediocrity**: Noise compresses published quality from both ends
+
+## Paper
+
+The accompanying paper, "Why Good Papers Get Rejected: A Simulation of Peer Review as Noisy Signal Extraction," is being prepared for submission to *The Accounting Review*.
+
+See `paper/paper.org` for the manuscript (org-mode format).
 
 ## Usage
 
-FIXME: explanation
+```bash
+# Start REPL for interactive development
+lein repl
 
-    $ java -jar publication-sim-0.1.0-standalone.jar [args]
+# Run all paper experiments
+lein run -m publication-sim.paper-experiments
 
-## Options
+# Run tests
+lein test
+```
 
-FIXME: listing of options this app accepts.
+## Project Structure
 
-## Examples
+- `src/publication_sim/review_model.clj` - Main peer review model
+- `src/publication_sim/paper_experiments.clj` - Reproducible experiments for paper
+- `paper/paper.org` - Manuscript in org-mode
+- `peer_review_literature_summary.md` - Literature review notes
 
-...
+## Key Parameters
 
-### Bugs
+| Parameter | Value | Source |
+|-----------|-------|--------|
+| ICC | 0.34 | Bornmann et al. (2010) meta-analysis |
+| noise-sd | 30 | Derived from ICC |
+| threshold | 20 | 80th percentile selectivity |
+| dimensions | 2 | Conservative (Interest + Rigor) |
+| reviewers | 2 | Typical for accounting journals |
 
-...
+## Dependencies
 
-### Any Other Sections
-### That You Think
-### Might be Useful
+- Clojure 1.11+
+- [fastmath](https://github.com/generateme/fastmath) - Statistical functions
+- [oz](https://github.com/metasoarous/oz) - Visualizations (optional)
 
 ## License
 
-Copyright © 2025 FIXME
+Copyright 2025-2026 Matthew D. DeAngelis
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+Eclipse Public License 2.0

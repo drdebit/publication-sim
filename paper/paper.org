@@ -12,8 +12,15 @@
 #+LATEX_HEADER: \usepackage[margin=1in]{geometry}
 #+LATEX_HEADER: \usepackage{setspace}
 #+LATEX_HEADER: \doublespacing
+#+LATEX_HEADER: \usepackage{times}
 
-* Abstract                                                         :noexport:
+# For submission: Keywords and JEL codes go on separate title page
+# These are included here for reference:
+# Keywords: peer review, publication process, inter-rater reliability,
+#           false negative rate, simulation, accounting journals
+# JEL Codes: M41 (Accounting), C63 (Simulation Modeling)
+
+* Abstract
 
 Recent surveys document growing dissatisfaction with the accounting
 publication process, with researchers believing acceptance rates should
@@ -31,6 +38,13 @@ multiple moderate-quality papers rather than single excellent papers. My
 findings reframe the conversation from "reviewers are biased" to "the system
 is structurally noisy," pointing toward different remedies than those
 typically proposed.
+
+* Declaration of Generative AI in the Writing Process
+
+During the preparation of this work, the author used Claude (Anthropic) to
+assist with manuscript drafting, code development, and editorial refinement.
+The author has reviewed and edited all output and takes full responsibility
+for the content of the publication.
 
 * Introduction
 
