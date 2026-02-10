@@ -9,7 +9,7 @@ A Clojure simulation studying peer review as a noisy signal extraction problem. 
 ## Current Status
 
 **Paper is near submission-ready.** Key findings:
-- ~45% of deserving papers rejected due to measurement error alone (baseline: 2 reviewers, ICC=0.34, threshold=20th percentile)
+- ~45% of deserving papers rejected due to measurement error alone (baseline: 2 reviewers, σ=30, T=50)
 - Plausible bounds: 28-55% FNR depending on assumptions
 - Single-reviewer journals (JAR/JAE model): ~52% FNR
 - "Convergence to mediocrity": noise compresses published quality from both ends
@@ -64,13 +64,13 @@ cd paper && latexmk -pdf paper.tex
 - Key experiments:
   - `experiment-reviewer-count`: Effect of 1-10 reviewers on error rates
   - `experiment-quality-strategy`: Acceptance probability by quality level
-  - `experiment-selectivity`: FNR across different acceptance rates
-  - `experiment-threshold-crossing`: Shows threshold as crossover point
-  - `experiment-dimension-correlation`: Effect of correlated dimensions
+  - `experiment-threshold`: FNR across different selectivity thresholds
+  - `experiment-noise-crossover`: Shows threshold as crossover point
+  - `experiment-dimension-correlation`: Effect of correlated dimensions on AND-gate
 
 **`src/publication_sim/paper_experiments.clj`** - Run all experiments for paper
 - Entry point: `lein run -m publication-sim.paper-experiments`
-- Runs all experiments with 20 iterations for stability
+- Runs all experiments with 50 iterations (10,000 MC trials) for stability
 - Outputs formatted tables for paper
 
 **`src/publication_sim/core.clj`** - Original dynamic simulation (exploratory)
@@ -85,9 +85,9 @@ cd paper && latexmk -pdf paper.tex
 | Parameter | Value | Source |
 |-----------|-------|--------|
 | ICC | 0.34 | Meta-analysis of 70 studies |
-| noise-sd | 30 | Derived from ICC, quality-sd=50 |
-| quality-sd | 50 | Assumed true quality distribution |
-| threshold | 20 | 80th percentile selectivity |
+| noise-sd | 30 | Derived from ICC=0.34 with τ=20; σ≈28, rounded to 30 |
+| quality-sd (τ) | 20 | True quality distribution SD |
+| threshold | 50 | Baseline moderate selectivity (70 for strategy experiments) |
 | dimensions | 2 | Interest + Rigor (conservative) |
 | reviewers | 2 | Typical for accounting journals |
 

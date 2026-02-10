@@ -9,70 +9,87 @@
             [clojure.pprint :as pp]))
 
 (def num-runs
-  "Number of simulation runs to average for stability."
-  20)
+  "Number of simulation runs to average for stability.
+   50 runs produces estimates stable to ~1 percentage point."
+  50)
+
+(def num-trials
+  "Number of Monte Carlo trials for acceptance probability estimation.
+   10000 trials produces estimates stable to ~0.5 percentage points."
+  10000)
+
+(defn- run-with-progress
+  "Run experiment with progress indicator."
+  [label thunk]
+  (print (str label "... ")) (flush)
+  (let [result (thunk)]
+    (println "done.")
+    result))
 
 (defn run-all-experiments
   "Run all experiments and return results map."
   []
   (println "Running all experiments for paper...")
-  (println "This may take a few minutes.\n")
+  (println (str "Settings: " num-runs " runs, " num-trials " Monte Carlo trials."))
+  (println "This may take several minutes.\n")
 
-  (print "Experiment 1: Reviewer count... ") (flush)
-  (let [exp1 (rm/experiment-reviewer-count :num-runs num-runs)]
-    (println "done.")
+  (let [exp1 (run-with-progress "Experiment 1: Reviewer count"
+               #(rm/experiment-reviewer-count :num-runs num-runs))
+        exp2 (run-with-progress "Experiment 2: Noise level"
+               #(rm/experiment-noise-level :num-runs num-runs))
+        exp3 (run-with-progress "Experiment 3: Dimensions (AND-gating)"
+               #(rm/experiment-dimensions :num-runs num-runs))
+        exp4 (run-with-progress "Experiment 4: Threshold/selectivity"
+               #(rm/experiment-threshold :num-runs num-runs))
+        exp5 (run-with-progress "Experiment 5: Quality/volume strategy"
+               #(rm/experiment-quality-strategy :num-trials num-trials))
+        exp6 (run-with-progress "Experiment 6: Strategy comparison"
+               #(rm/experiment-strategy-comparison :num-trials num-trials))
+        int1 (run-with-progress "Interaction: Reviewers x Noise"
+               #(rm/experiment-reviewers-x-noise :num-runs num-runs))
+        int2 (run-with-progress "Interaction: Quality x Noise"
+               #(rm/experiment-quality-x-noise :num-trials num-trials))
+        int3 (run-with-progress "Interaction: Reviewers x Dimensions"
+               #(rm/experiment-reviewers-x-dimensions :num-runs num-runs))
+        int4 (run-with-progress "Interaction: Threshold x Noise"
+               #(rm/experiment-threshold-x-noise :num-runs num-runs))
+        supp (run-with-progress "Supplemental: Editor as partial reviewer"
+               #(rm/experiment-editor-as-reviewer :num-runs num-runs))
+        rob1 (run-with-progress "Robustness: ICC sensitivity"
+               #(rm/experiment-icc-sensitivity :num-runs num-runs))
+        rob2 (run-with-progress "Robustness: Aggregation method"
+               #(rm/experiment-aggregation-method :num-runs num-runs))
+        rob3 (run-with-progress "Robustness: Correlated errors"
+               #(rm/experiment-correlated-errors :num-runs num-runs))
+        rob4 (run-with-progress "Robustness: Quality variance"
+               #(rm/experiment-quality-variance :num-runs num-runs))
+        rob5 (run-with-progress "Robustness: Extended strategies"
+               #(rm/experiment-extended-strategies :num-trials num-trials))
+        rob6 (run-with-progress "Robustness: Noise crossover"
+               #(rm/experiment-noise-crossover :num-trials num-trials))
+        rob7 (run-with-progress "Robustness: Dimension correlation"
+               #(rm/experiment-dimension-correlation :num-runs num-runs))]
 
-    (print "Experiment 2: Noise level... ") (flush)
-    (let [exp2 (rm/experiment-noise-level :num-runs num-runs)]
-      (println "done.")
+    (println)
 
-      (print "Experiment 3: Dimensions (AND-gating)... ") (flush)
-      (let [exp3 (rm/experiment-dimensions :num-runs num-runs)]
-        (println "done.")
-
-        (print "Experiment 4: Threshold/selectivity... ") (flush)
-        (let [exp4 (rm/experiment-threshold :num-runs num-runs)]
-          (println "done.")
-
-          (print "Experiment 5: Quality/volume strategy... ") (flush)
-          (let [exp5 (rm/experiment-quality-strategy)]
-            (println "done.")
-
-            (print "Experiment 6: Strategy comparison... ") (flush)
-            (let [exp6 (rm/experiment-strategy-comparison)]
-              (println "done.")
-
-              (print "Interaction: Reviewers x Noise... ") (flush)
-              (let [int1 (rm/experiment-reviewers-x-noise :num-runs num-runs)]
-                (println "done.")
-
-                (print "Interaction: Quality x Noise... ") (flush)
-                (let [int2 (rm/experiment-quality-x-noise)]
-                  (println "done.")
-
-                  (print "Interaction: Reviewers x Dimensions... ") (flush)
-                  (let [int3 (rm/experiment-reviewers-x-dimensions :num-runs num-runs)]
-                    (println "done.")
-
-                    (print "Interaction: Threshold x Noise... ") (flush)
-                    (let [int4 (rm/experiment-threshold-x-noise :num-runs num-runs)]
-                      (println "done.")
-
-                      (print "Supplemental: Editor as partial reviewer... ") (flush)
-                      (let [supp (rm/experiment-editor-as-reviewer :num-runs num-runs)]
-                        (println "done.\n")
-
-                        {:experiment-1-reviewer-count exp1
-                         :experiment-2-noise-level exp2
-                         :experiment-3-dimensions exp3
-                         :experiment-4-threshold exp4
-                         :experiment-5-quality-strategy exp5
-                         :experiment-6-strategy-comparison exp6
-                         :interaction-reviewers-x-noise int1
-                         :interaction-quality-x-noise int2
-                         :interaction-reviewers-x-dimensions int3
-                         :interaction-threshold-x-noise int4
-                         :supplemental-editor-as-reviewer supp}))))))))))))
+    {:experiment-1-reviewer-count exp1
+     :experiment-2-noise-level exp2
+     :experiment-3-dimensions exp3
+     :experiment-4-threshold exp4
+     :experiment-5-quality-strategy exp5
+     :experiment-6-strategy-comparison exp6
+     :interaction-reviewers-x-noise int1
+     :interaction-quality-x-noise int2
+     :interaction-reviewers-x-dimensions int3
+     :interaction-threshold-x-noise int4
+     :supplemental-editor-as-reviewer supp
+     :robustness-icc-sensitivity rob1
+     :robustness-aggregation-method rob2
+     :robustness-correlated-errors rob3
+     :robustness-quality-variance rob4
+     :robustness-extended-strategies rob5
+     :robustness-noise-crossover rob6
+     :robustness-dimension-correlation rob7}))
 
 (defn print-results
   "Print formatted results for all experiments."
@@ -228,6 +245,101 @@
                        (str (:editor-noise-sd r))
                        "n/a")
                      (:false-negative-rate r)
+                     (:accuracy r))))
+
+  (println "\n" (apply str (repeat 70 "=")) "\n")
+  (println "ROBUSTNESS: ICC Sensitivity")
+  (println (apply str (repeat 70 "-")))
+  (println "  ICC  | Noise SD | FNR    | FPR    | Accuracy")
+  (println (apply str (repeat 70 "-")))
+  (doseq [r (:robustness-icc-sensitivity results)]
+    (println (format "  %.2f |   %.1f   | %.3f  | %.3f  |  %.3f"
+                     (double (:icc r))
+                     (double (:implied-noise-sd r))
+                     (:false-negative-rate r)
+                     (:false-positive-rate r)
+                     (:accuracy r))))
+
+  (println "\n" (apply str (repeat 70 "=")) "\n")
+  (println "ROBUSTNESS: Mean vs Median Aggregation")
+  (println (apply str (repeat 70 "-")))
+  (println "Reviewers | Method | Accuracy | FNR")
+  (println (apply str (repeat 70 "-")))
+  (doseq [r (sort-by (juxt :num-reviewers :aggregation-method)
+                     (:robustness-aggregation-method results))]
+    (println (format "    %d     | %-6s |  %.3f   | %.3f"
+                     (:num-reviewers r)
+                     (name (:aggregation-method r))
+                     (:accuracy r)
+                     (:false-negative-rate r))))
+
+  (println "\n" (apply str (repeat 70 "=")) "\n")
+  (println "ROBUSTNESS: Correlated Reviewer Errors")
+  (println (apply str (repeat 70 "-")))
+  (println "Correlation | Reviewers | Accuracy | FNR")
+  (println (apply str (repeat 70 "-")))
+  (doseq [r (sort-by (juxt :correlation :num-reviewers)
+                     (:robustness-correlated-errors results))]
+    (println (format "    %.2f    |     %d     |  %.3f   | %.3f"
+                     (double (:correlation r))
+                     (:num-reviewers r)
+                     (:accuracy r)
+                     (:false-negative-rate r))))
+
+  (println "\n" (apply str (repeat 70 "=")) "\n")
+  (println "ROBUSTNESS: Quality Variance (tau)")
+  (println (apply str (repeat 70 "-")))
+  (println "Quality SD | ICC  | FNR    | FPR    | Accuracy")
+  (println (apply str (repeat 70 "-")))
+  (doseq [r (:robustness-quality-variance results)]
+    (println (format "    %2d     | %.2f | %.3f  | %.3f  |  %.3f"
+                     (:quality-sd r)
+                     (double (:implied-icc r))
+                     (:false-negative-rate r)
+                     (:false-positive-rate r)
+                     (:accuracy r))))
+
+  (println "\n" (apply str (repeat 70 "=")) "\n")
+  (println "ROBUSTNESS: Extended Strategy Comparison")
+  (println "(Including below-threshold lottery strategies)")
+  (println (apply str (repeat 70 "-")))
+  (println "Strategy         | Papers | Quality | P(Accept) | E[Pubs]")
+  (println (apply str (repeat 70 "-")))
+  (doseq [r (sort-by #(- (:expected-publications %))
+                     (:robustness-extended-strategies results))]
+    (println (format "%-16s |   %2d   |   %2d    |   %5.1f%%  |  %.3f"
+                     (:strategy r)
+                     (:papers r)
+                     (:quality r)
+                     (* 100 (:p-accept r))
+                     (:expected-publications r))))
+
+  (println "\n" (apply str (repeat 70 "=")) "\n")
+  (println "ROBUSTNESS: Noise Crossover Analysis")
+  (println "(Where does noise switch from helping to hurting?)")
+  (println (apply str (repeat 70 "-")))
+  (println "Quality | P(Low Noise) | P(High Noise) | Delta   | Effect")
+  (println (apply str (repeat 70 "-")))
+  (doseq [r (filter #(#{50 58 64 70 76 84 90} (:quality %))
+                    (:robustness-noise-crossover results))]
+    (println (format "   %2d   |    %5.1f%%    |    %5.1f%%     | %+5.1f%%  | %s"
+                     (:quality r)
+                     (* 100 (:p-accept-low-noise r))
+                     (* 100 (:p-accept-high-noise r))
+                     (* 100 (:delta r))
+                     (name (:noise-effect r)))))
+
+  (println "\n" (apply str (repeat 70 "=")) "\n")
+  (println "ROBUSTNESS: Dimension Correlation")
+  (println "(Does correlated quality across dimensions reduce AND-gate effect?)")
+  (println (apply str (repeat 70 "-")))
+  (println "Dim Correlation | FNR    | FPR    | Accuracy")
+  (println (apply str (repeat 70 "-")))
+  (doseq [r (:robustness-dimension-correlation results)]
+    (println (format "      %.1f       | %.3f  | %.3f  |  %.3f"
+                     (double (:dimension-correlation r))
+                     (:false-negative-rate r)
+                     (:false-positive-rate r)
                      (:accuracy r))))
 
   (println "\n" (apply str (repeat 70 "=")) "\n")

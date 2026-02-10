@@ -325,21 +325,23 @@
 
 (defn experiment-strategy-comparison
   "Compare expected publications under different quality/volume strategies."
-  [& {:keys [strategies]
+  [& {:keys [strategies num-trials]
       :or {strategies {:one-excellent    {:papers 1 :quality 85}
                        :two-very-good    {:papers 2 :quality 78}
                        :two-good         {:papers 2 :quality 72}
-                       :three-decent     {:papers 3 :quality 68}}}}]
+                       :three-decent     {:papers 3 :quality 68}}
+           num-trials 1000}}]
   (let [quality-probs (into {}
                             (map (fn [{:keys [quality-level acceptance-probability]}]
                                    [quality-level acceptance-probability])
-                                 (experiment-quality-strategy)))]
+                                 (experiment-quality-strategy :num-trials num-trials)))]
     (into {}
           (map (fn [[strategy-name {:keys [papers quality]}]]
                  (let [prob (or (get quality-probs quality)
                                 (:acceptance-probability
                                  (first (experiment-quality-strategy
-                                         :quality-levels [quality]))))
+                                         :quality-levels [quality]
+                                         :num-trials num-trials))))
                        expected (* papers prob)]
                    [strategy-name
                     {:papers papers
@@ -813,3 +815,50 @@
                           (> delta 0.02) :helps
                           (< delta -0.02) :hurts
                           :else :neutral)})))))
+
+;; =============================================================================
+;; Dimension Correlation Analysis
+;; =============================================================================
+
+(defn generate-paper-correlated-dims
+  "Generate a paper with correlated true quality across dimensions.
+   Uses shared+independent decomposition: each dimension's quality is
+   quality-mean + shared-component + independent-component, producing
+   pairwise correlation = dimension-correlation between dimensions."
+  [{:keys [dimensions quality-mean quality-sd dimension-correlation]}]
+  (let [corr (or dimension-correlation 0)
+        shared-sd (* quality-sd (Math/sqrt corr))
+        shared (r/grand 0 shared-sd)
+        indep-sd (* quality-sd (Math/sqrt (- 1 corr)))]
+    {:pid (str (java.util.UUID/randomUUID))
+     :true-quality (into {}
+                         (map (fn [dim]
+                                [dim (+ quality-mean shared (r/grand 0 indep-sd))])
+                              dimensions))}))
+
+(defn run-experiment-correlated-dims
+  "Run experiment with correlated true quality across dimensions."
+  [config]
+  (let [merged-config (merge default-config config)
+        papers (vec (repeatedly (:num-papers merged-config)
+                                #(generate-paper-correlated-dims merged-config)))
+        results (map #(review-paper % merged-config) papers)]
+    (analyze results merged-config)))
+
+(defn experiment-dimension-correlation
+  "Robustness: Effect of correlated quality across dimensions.
+   When a paper strong on interest is also likely strong on rigor,
+   the AND-gate effect is attenuated (fewer 'weak spot' dimensions)."
+  [& {:keys [correlations num-runs]
+      :or {correlations [0 0.2 0.4 0.6 0.8]
+           num-runs 10}}]
+  (vec
+   (for [corr correlations]
+     (let [runs (repeatedly num-runs
+                            #(run-experiment-correlated-dims
+                              {:dimension-correlation corr}))
+           avg (fn [k] (/ (reduce + (map k runs)) num-runs))]
+       {:dimension-correlation corr
+        :false-negative-rate (avg :false-negative-rate)
+        :false-positive-rate (avg :false-positive-rate)
+        :accuracy (avg :accuracy)}))))
