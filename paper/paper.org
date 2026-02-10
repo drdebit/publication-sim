@@ -269,7 +269,7 @@ approximately 5% of submissions, while JAR's desk rejection rate is
 approximately 15%. Papers that survive desk rejection face the full review
 process, but the low desk rejection rates mean that reviewer resources are
 spread across a large pool of submissions. JAR charges substantial
-submission fees (currently \$750 for authors from top-tier institutions),
+submission fees (currently @@latex:\$@@750 for authors from top-tier institutions),
 which may deter some submissions but does not address the fundamental
 reliability problem.
 
