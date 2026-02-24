@@ -36,89 +36,114 @@ to reviewer disagreement alone. This creates perverse incentives: researchers
 maximize expected publications by producing multiple moderate-quality papers
 rather than single excellent papers, and methodological conformity emerges as
 a rational defense against subjectivity---clustering near established
-approaches reduces the scope for disagreement. The problem is not that
-reviewers are biased or incompetent. The problem is that there is no shared
-definition of what "good" means---and that distinction points toward very
-different remedies. 
+approaches reduces the scope for disagreement. These patterns are
+consistent with a structural mechanism: reviewers disagree because there is
+no shared definition of what "good" means, and that distinction points
+toward different remedies. 
 
 * Introduction
 
-Ask an accounting professor whether good papers get rejected from top
-journals and the answer is immediate: of course they do. Everyone knows
-this. The field wisdom is that a good paper has roughly a coin-flip chance
-of acceptance---and the data bears this out.
-cite:woodComparingPublicationProcess2016 found that accounting academics
-perceived very low citation patterns relative to other disciplines and
-believed the review process was deteriorating.
-cite:burtonPerceptionsAccountingAcademics2024 updated this survey and found
-perceptions have only worsened: the rising generation of scholars holds even
-more negative views than their predecessors, respondents believe acceptance
-rates should nearly double, and there is widespread concern that top
-journals favor narrow methodologies while underweighting practice relevance.
-cite:burtonWeMatterAttention2021 documented that accounting research
-receives significantly less attention from policymakers and the public than
-economics, finance, and other disciplines.
+Accounting scholars widely report that good papers are rejected from top
+journals and that acceptance rates are lower than they should be. Evidence
+from surveys is consistent with this perception. cite:woodComparingPublicationProcess2016
+find that accounting academics perceive low citation patterns and a
+deteriorating review process. cite:burtonPerceptionsAccountingAcademics2024
+show these perceptions have worsened and that respondents believe acceptance
+rates should nearly double, with concerns that top journals favor narrow
+methodologies. cite:burtonWeMatterAttention2021 document that accounting
+research receives less attention from policymakers and the public than
+economics and finance.
 
-Why? The common explanation centers on reviewer /bias/---topic preferences,
+The common explanation centers on reviewer /bias/---topic preferences,
 methodological prejudice, or personal networks that systematically
-disadvantage certain work. Bias undoubtedly exists. But bias would produce
-quick, decisive rejections: reviewers who share a prejudice would agree with
-each other and the process would conclude rapidly. That is not what we
-observe. What we observe is /disagreement/. Accounting journals have longer
-times to publication than comparable journals in other fields despite using
-fewer reviewers (cite:woodComparingPublicationProcess2016). Papers routinely
-go through multiple revision rounds as authors attempt to satisfy divergent
-reviewer demands. Management Science imposed an explicit two-round limit to
-prevent excessive iterations---a policy unnecessary if reviewers typically
-agreed.
+disadvantage certain work. Bias undoubtedly exists. However, the empirical
+patterns in peer review are consistent with a different mechanism: reviewer
+disagreement. In markets, disagreement is associated with gradual
+information diffusion rather than immediate price adjustment
+(cite:fedykDisagreementNewsGradual2021). In accounting, journals have longer
+times to publication than comparable journals despite using fewer reviewers
+(cite:woodComparingPublicationProcess2016). Papers routinely go through
+multiple revision rounds as authors attempt to satisfy divergent reviewer
+demands. Management Science imposed an explicit two-round limit to prevent
+excessive iterations, a policy that would be unnecessary if reviewers
+typically agreed.
 
-The deeper problem is not bias but subjectivity. Peer reviewers are
-diligent, competent professionals who genuinely disagree about what
-constitutes good research. There is no shared definition of "interest,"
-"contribution," or even "rigor" that would produce consensus. The empirical
-evidence confirms this: cite:bornmannReliabilityGeneralizationStudyJournal2010
-found that two-thirds of the variance in reviewer assessments reflects
-disagreement rather than true quality differences, and training interventions
-produce "little or no improvement" because the problem is not competence
-(cite:hesselbergReviewerTrainingImproving2023). You cannot train people to
-agree when there is no ground truth to agree on.
+Peer reviewers are diligent, competent professionals who often disagree
+about what constitutes good research. There is no shared definition of
+"interest," "contribution," or even "rigor" that reliably produces
+consensus. The empirical evidence supports this: cite:bornmannReliabilityGeneralizationStudyJournal2010
+find that roughly two-thirds of the variance in reviewer assessments
+reflects disagreement rather than true quality differences, and training
+interventions produce little or no improvement
+(cite:hesselbergReviewerTrainingImproving2023).
 
-When reviewers disagree and a paper must pass on every evaluation
-dimension---interest /and/ rigor /and/ contribution---disagreement on any
-single dimension sinks a deserving paper. A paper that is genuinely
-excellent can be rejected because one reviewer finds the topic
-uninteresting while the other finds the execution imperfect. Neither
-reviewer is wrong. They simply see the paper differently. Multiply this
-across two or three evaluation dimensions, and the probability that a good
-paper survives unscathed drops sharply.
+When papers must pass on every evaluation dimension---interest /and/ rigor
+/and/ contribution---disagreement on any single dimension can sink a
+deserving paper. This is the AND-gate structure of peer review. A paper that
+is genuinely excellent can be rejected because one reviewer finds the topic
+uninteresting while another finds the execution imperfect. Multiply this
+across two or three dimensions, and the probability that a good paper
+survives unscathed falls sharply.
 
 Using a simulation calibrated to empirical inter-rater agreement data, I
 show that this mechanism produces false rejection rates of approximately
 45%---nearly half of deserving papers rejected from disagreement alone.
-The field wisdom about coin-flip odds is not cynicism. It is arithmetic.
+These rates are consistent with the field's coin-flip intuition about
+acceptance.
 
-The consequences run deeper than frustration. This structure creates
-perverse incentives: researchers maximize expected publications by
-producing multiple "very good" papers rather than single "excellent"
-papers, explaining the prevalence of incremental research and
-fragmentation strategies documented in the literature. It also rationalizes
-methodological conformity. If reviewers cannot agree on what "good" looks
-like for novel work, clustering near established approaches---where
-evaluation criteria are better defined and disagreement is lower---becomes
-a rational defense against subjectivity. This explains the methodological
-narrowing documented by cite:burtonPerceptionsAccountingAcademics2024, the
-research-practice gap documented by cite:rajgopalIntegratingPracticeAccounting2021,
+The consequences extend beyond frustration. This structure creates
+incentives to maximize expected publications by producing multiple
+moderate-quality papers rather than a single excellent paper, and it
+encourages methodological conformity. When reviewers disagree about what
+"good" looks like for novel work, clustering near established approaches
+reduces the scope for disagreement. This pattern is consistent with the
+methodological narrowing documented by cite:burtonPerceptionsAccountingAcademics2024,
+the research-practice gap documented by cite:rajgopalIntegratingPracticeAccounting2021,
 and the doctoral socialization patterns documented by
-cite:fogartyHandThatRocks2010. Individually rational. Collectively harmful.
+cite:fogartyHandThatRocks2010.
 
 This paper reframes how we understand publication dysfunction. The problem
-is not biased reviewers or an incompetent system. It is structural
+is not simply biased reviewers or an incompetent system. It is structural
 disagreement operating through a decision architecture that amplifies its
-effects. Simulation is necessary because true quality is unobserved---we
-cannot calculate false rejection rates from empirical data alone---but the
-simulation is a tool. The contribution is the insight: understanding /why/
-good papers get rejected, why common reforms fail, and what structural
-changes might actually help.
+effects. Simulation is the tool; the contribution is the insight.
+
+** Contributions
+
+My work makes several contributions to the accounting profession's
+understanding of its own publication process.
+
+First, I /reframe/ the problem. The conventional narrative attributes
+publication dysfunction to reviewer bias, editorial gatekeeping, or
+insufficient rigor. I show that the patterns the profession
+observes---high false rejection rates, incremental research, methodological
+narrowing---emerge naturally from structural disagreement alone, without
+requiring any bias or incompetence. This reframing matters because it
+redirects reform efforts from "fixing reviewers" to redesigning systems
+that are robust to disagreement.
+
+Second, I show that /disagreement alone/ produces the profession's observed
+dysfunction. Using a simulation calibrated to empirical inter-rater
+agreement data, I demonstrate that approximately 45% of deserving papers
+are rejected when reviewers disagree at empirically documented levels and
+papers must pass on multiple evaluation dimensions. This provides a
+structural explanation for observed behaviors---salami-slicing,
+fragmentation, incremental extensions---that does not require assuming
+researcher irrationality or reviewer bias.
+
+Third, I identify /methodological conformity as a rational but collectively
+harmful response/ to disagreement. When reviewers cannot agree on what
+"good" looks like for novel work, clustering near established
+approaches---where evaluation criteria are better defined and consensus is
+higher---reduces rejection risk. This explains the methodological narrowing
+documented by cite:burtonPerceptionsAccountingAcademics2024 and the
+research-practice gap documented by cite:rajgopalIntegratingPracticeAccounting2021.
+
+Fourth, I show /why common reforms fail/ and what structural changes would
+help. Training does not work because reviewers are already competent. Detailed
+rubrics do not work because they formalize the dimensions on which reviewers
+disagree. What does help: fewer evaluation dimensions, compensatory rather than
+conjunctive decision rules, and reviewer diversity rather than reviewer
+quantity.
 
 The remainder of this paper proceeds as follows. Section [[#lit-review]]
 reviews prior research on reviewer agreement and positions my
@@ -200,7 +225,7 @@ holds more negative views than their predecessors. Top journals favor
 certain topic areas and methodologies; reviewers underweight practice
 relevance; reviewers overweight incremental contribution and methodological
 rigor. New assistant professors hold these views /more strongly/ than senior
-faculty. The problem is intensifying, not ameliorating.
+faculty. These concerns appear to be intensifying over time.
 
 The consequences extend beyond individual careers.
 cite:burtonWeMatterAttention2021 documented that accounting research
@@ -330,49 +355,11 @@ five reduces it by only 20%. My simulation quantifies these diminishing
 returns and shows that meaningful improvements require structural changes
 rather than marginal additions.
 
-** Contributions
-
-My work makes several contributions to the accounting profession's
-understanding of its own publication process.
-
-First, I /reframe/ the problem. The conventional narrative attributes
-publication dysfunction to reviewer bias, editorial gatekeeping, or
-insufficient rigor. I show that the patterns the profession
-observes---high false rejection rates, incremental research, methodological
-narrowing---emerge naturally from structural disagreement alone, without
-requiring any bias or incompetence. This reframing matters because it
-redirects reform efforts from "fixing reviewers" to redesigning systems
-that are robust to disagreement.
-
-Second, I show that /disagreement alone/ produces the profession's observed
-dysfunction. Using a simulation calibrated to empirical inter-rater
-agreement data, I demonstrate that approximately 45% of deserving papers
-are rejected when reviewers disagree at empirically documented levels and
-papers must pass on multiple evaluation dimensions. This provides a
-structural explanation for observed behaviors---salami-slicing,
-fragmentation, incremental extensions---that does not require assuming
-researcher irrationality or reviewer bias.
-
-Third, I identify /methodological conformity as a rational but collectively
-harmful response/ to disagreement. When reviewers cannot agree on what
-"good" looks like for novel work, clustering near established
-approaches---where evaluation criteria are better defined and consensus is
-higher---reduces rejection risk. This explains the methodological narrowing
-documented by cite:burtonPerceptionsAccountingAcademics2024 and the
-research-practice gap documented by cite:rajgopalIntegratingPracticeAccounting2021.
-
-Fourth, I show /why common reforms fail/ and what structural changes would
-help. Training does not work because reviewers are already competent. Detailed
-rubrics do not work because they formalize the dimensions on which reviewers
-disagree. What does help: fewer evaluation dimensions, compensatory rather than
-conjunctive decision rules, and reviewer diversity rather than reviewer
-quantity.
-
 My simulation differs from prior work
 (cite:esareyDoesPeerReview2017; cite:neffPeerReviewGame2006) in integrating
 multi-dimensional evaluation with empirical agreement calibration and in
-calibrating to accounting-specific institutional features. But the
-simulation is a tool. The contribution is the insight into how structural
+calibrating to accounting-specific institutional features. It provides the
+quantitative backbone for the mechanism emphasized here: structural
 disagreement produces the publication dysfunction that the accounting
 profession has long observed but misdiagnosed.
 
@@ -628,29 +615,26 @@ Reliability denotes the correlation between true total quality and observed
 total quality across all papers---i.e., how well the review process
 preserves the rank ordering of manuscripts.
 
-Under realistic conditions, approximately 45% of papers that deserve
-acceptance are rejected due to reviewer disagreement alone. With 2 reviewers
-(the accounting norm), FNR = 0.45. Nearly half of good papers are filtered
-out by subjectivity, not quality.
+With two reviewers---the accounting norm---nearly half of deserving papers
+are rejected (FNR = 0.45). Not because they are bad. Because reviewers
+disagree.
 
-The effect of reviewer count exhibits clear diminishing returns. Going from
-1 to 2 reviewers reduces FNR by 6.9 percentage points---the largest single
-improvement. Going from 2 to 5 provides another 10.5 percentage points.
-Beyond 5, gains are marginal.
+The gains from additional reviewers are real but diminishing. Going from
+one to two reviewers reduces FNR by 6.9 percentage points---the largest
+single improvement. Going from two to five provides another 10.5 points.
+Beyond five, gains are marginal: doubling the reviewer count from 5 to 10
+buys 6.8 points.
 
-This is consistent with cite:esareyDoesPeerReview2017, who found that
-papers at the 80th percentile of quality face essentially coin-flip odds
-of acceptance. My simulation provides the mechanism: low inter-rater
-agreement combined with multi-dimensional evaluation.
+These magnitudes are consistent with cite:esareyDoesPeerReview2017, who
+find that papers at the 80th percentile of quality face essentially
+coin-flip odds of acceptance. My simulation provides the mechanism: low
+inter-rater agreement combined with multi-dimensional evaluation.
 
-The single-reviewer case (n = 1) deserves particular attention because JAR
-and JAE frequently use only one reviewer. With a single reviewer, FNR rises
-to 52%. More than half of deserving papers are rejected based on one
-person's subjective assessment. Adding a second reviewer---the largest
-marginal gain in the table---reduces FNR by 6.9 percentage points. Yet
-these journals have chosen speed over accuracy. At identical true quality, a
-paper's fate at a single-reviewer journal is substantially more random than
-at a two-reviewer journal.
+The single-reviewer case deserves particular attention. JAR and JAE
+frequently use one reviewer. With a single reviewer, FNR rises to 52%---more
+than half of deserving papers rejected on one person's subjective
+assessment. Adding a second reviewer is the largest marginal gain in the
+table. Yet these journals have chosen speed over accuracy.
 
 ** The AND-Gate Effect: Dimensions Amplify Errors
 
@@ -661,20 +645,19 @@ at a two-reviewer journal.
 |          3 | 60.0%  |  8.5% |    85.1% |
 |          4 | 70.5%  |  4.5% |    91.6% |
 
-Adding evaluation dimensions dramatically increases false rejection rates.
-Two dimensions: 45% FNR. Three: 60%. Four: 71%.
+Adding evaluation dimensions substantially increases false rejection rates.
+With two dimensions, FNR is about 45%; with three, 60%; with four, 71%.
 
-Each additional dimension is another opportunity for disagreement to cause
-rejection. A paper must clear the threshold on /every/ dimension, so
-disagreement on /any/ dimension can sink it. The AND-gate is particularly
-punishing for borderline-good papers---exactly the papers that selective
-journals are trying to distinguish among.
+Each additional dimension creates another potential failure point under a
+conjunctive rule. When acceptance requires clearing the threshold on every
+dimension, disagreement on any single dimension can produce rejection. The
+AND-gate is therefore most punitive for papers near the threshold, which are
+also the papers most selective journals are attempting to distinguish.
 
-Four evaluation dimensions is not unrealistic. Most substantive referee
-reports include more than three distinct evaluative judgments---interest,
-rigor, contribution, writing quality, data quality, theoretical framing.
-If any of these operates as a binding constraint, the AND-gate effect
-applies.
+Four evaluation dimensions is not implausible. Referee reports typically
+include multiple distinct judgments---interest, rigor, contribution, writing
+quality, data quality, and theoretical framing. If these operate as binding
+constraints, the AND-gate effect follows.
 
 ** Selective Journals Face Higher Baseline FNR
 
@@ -694,19 +677,17 @@ applies.
 |        70 |       25 |    94.8% | 48.9%  |  4.2% |
 |        70 |       35 |    92.6% | 59.0%  |  6.1% |
 
-An important finding for top accounting journals: the more selective the
-journal, the /higher/ the baseline false negative rate. Even with low
-disagreement (SD = 15), a threshold of 70 yields an FNR of 41%---double
-the 21% at a lenient threshold of 40. At high disagreement (SD = 35),
-selective journals reach 59%.
+Selective journals face higher false rejection rates. With low disagreement
+(SD = 15), a threshold of 70 yields an FNR of 41%, compared to 21% at a
+threshold of 40. With high disagreement (SD = 35), the FNR at a threshold
+of 70 reaches 59%.
 
-The reason is straightforward. Selective journals are making decisions among
-papers clustered near the high end of quality. Most truly deserving papers
-are only marginally above threshold, making them vulnerable to downward
-assessments from reviewers who happen to disagree. At lenient journals,
-there is more separation between deserving and undeserving papers, so
-disagreement is less likely to cause misclassification. Selectivity and
-accuracy work against each other.
+Selective journals are deciding among papers clustered near the top of the
+quality distribution. Many deserving papers are only marginally above
+threshold---and therefore vulnerable to a single downward assessment. At
+lenient journals, deserving and undeserving papers are better separated,
+so disagreement is less likely to flip decisions. Selectivity and accuracy
+move in opposite directions.
 
 ** Disagreement Helps Bad Papers, Hurts Good Papers
 
@@ -715,17 +696,17 @@ accuracy work against each other.
 #+ATTR_LATEX: :width 0.85\textwidth :placement [htbp]
 [[file:figures/quality-x-noise.pdf]]
 
-Figure [[fig:quality-noise]] reveals a striking pattern: disagreement does
-not merely add randomness---it systematically redistributes acceptance
-probability from good papers to bad ones. At quality = 90, acceptance
-probability drops from 94% with low disagreement to 52% with high
-disagreement. At quality = 50, acceptance probability /rises/ from 0.2% to
-7%. Disagreement takes from the deserving and gives to the undeserving.
+Figure [[fig:quality-noise]] shows that disagreement systematically shifts
+acceptance probability across the quality distribution. At quality = 90,
+acceptance probability falls from 94% under low disagreement to 52% under
+high disagreement. At quality = 50, acceptance probability rises from 0.2%
+to 7%. Disagreement therefore reduces acceptance for high-quality papers and
+increases acceptance for lower-quality papers.
 
 The lines converge near the threshold (quality = 70), where acceptance
-probability is roughly 25% regardless of disagreement level. Borderline
-papers face a coin-flip regardless of how much reviewers agree. The benefit
-of writing excellent work is dramatically eroded by subjectivity.
+probability is roughly 25% regardless of disagreement level. For borderline
+papers, disagreement does not change acceptance much; for very strong
+papers, it substantially reduces acceptance probabilities.
 
 *** The Threshold as Crossover Point
 
@@ -743,21 +724,19 @@ disagreement varies across the full quality spectrum.
 |      84 |          81.1% |           45.5% | -35.6% | Hurts   |
 |      90 |          94.4% |           53.3% | -41.1% | Hurts   |
 
-The threshold acts as a precise crossover point. Below threshold,
-disagreement provides random chances to be pushed above the acceptance
+The threshold is a crossover point. Below the threshold, disagreement
+increases acceptance probabilities by occasionally pushing papers above the
 bar. The maximum benefit occurs around 6--12 points below threshold (quality
-58--64), where high disagreement increases acceptance probability by
-approximately 11 percentage points. Above threshold, disagreement is purely
-destructive, with the damage increasing with quality: excellent papers
-(quality 90) lose over 40 percentage points of acceptance probability when
-disagreement is high.
+58--64), where high disagreement increases acceptance by roughly 11
+percentage points. Above the threshold, disagreement reduces acceptance, and
+the reduction grows with quality; at quality 90, high disagreement reduces
+acceptance by more than 40 percentage points.
 
-This asymmetry has a simple interpretation: disagreement creates variance
-around true quality. For papers below threshold, upward variance helps
-(acceptance) while downward variance doesn't matter (rejection either way).
-For papers above threshold, downward variance hurts (rejection) while upward
-variance doesn't matter (acceptance either way). The net effect is
-redistribution from good to mediocre.
+This asymmetry reflects variance around true quality. Below threshold,
+upward variance helps while downward variance does not change the decision.
+Above threshold, downward variance hurts while upward variance does not
+change the decision. The net effect is a redistribution of acceptance from
+high-quality to lower-quality papers.
 
 *** Convergence to Mediocrity
 
@@ -777,37 +756,33 @@ Consider the compression under high disagreement:
 - Quality 50 → 7% acceptance (up from 0.1% with low disagreement)
 
 The ratio of acceptance rates shrinks from 940:1 to 8:1. High disagreement
-dramatically weakens the correlation between true quality and publication.
-The published literature becomes less representative of actual quality
-differences and more representative of luck.
+therefore weakens the relationship between true quality and publication.
+The published literature becomes less representative of underlying quality
+differences and more sensitive to noise in reviewer assessments.
 
-An observer examining only published papers would see a narrower quality
-distribution than actually exists in submissions---the tails are truncated
-from both ends. Excellent papers that deserved publication are missing.
-Mediocre papers that should have been filtered out are present. The
-published record /systematically underrepresents/ the true variance in
-research quality.
+From the perspective of published output, the quality distribution appears
+narrower than the submission distribution: the tails are truncated from both
+ends. Some excellent papers are rejected, and some mediocre papers are
+accepted. The published record therefore underrepresents the true variance
+in research quality.
 
-This convergence to mediocrity helps explain why top journals are perceived
-as publishing increasingly similar work. Disagreement compresses the quality
-distribution of accepted papers. Reviewers from similar methodological
-backgrounds may add correlated assessments (see Section [[#robustness]]).
-The published literature trends toward a narrow band of "safe" research that
-reliably clears the threshold without attempting excellence---exactly the
-pattern documented by cite:burtonPerceptionsAccountingAcademics2024.
+This compression provides a mechanism for perceptions of increasing
+similarity in top journals. Disagreement compresses the distribution of
+accepted papers, and correlated assessments among similar reviewers can
+reinforce this effect (see Section [[#robustness]]). The resulting output
+clusters in a narrow band of "safe" work, consistent with the
+methodological narrowing documented by cite:burtonPerceptionsAccountingAcademics2024.
 
-This mechanism operates independently of editorial intent or reviewer
-competence. A journal staffed entirely by well-meaning, highly-qualified
-reviewers will still exhibit convergence to mediocrity if the reviewers
-disagree sufficiently about what constitutes quality. The problem is
-structural, not personnel.
+This mechanism does not depend on reviewer intent. Even with diligent,
+competent reviewers, sufficiently high disagreement implies convergence in
+the observed quality of accepted papers.
 
 ** Quality vs. Volume: Incentive Implications
 
-The structure of peer review---where disagreement governs outcomes---creates
-incentives that favor quantity over quality. To see why, compare expected
-publications under four hypothetical strategies for a researcher with
-fixed total effort (at threshold = 70, 2 reviewers, disagreement SD = 30):
+The structure of peer review creates incentives that favor quantity over
+quality. To illustrate, compare expected publications under four strategies
+that hold total effort fixed (threshold = 70, 2 reviewers, disagreement
+SD = 30):
 
 #+CAPTION: Strategy Comparison: Quality vs. Volume
 | Strategy       | Papers | Quality | P(Accept) | E[Publications] |
@@ -822,11 +797,11 @@ fixed total effort (at threshold = 70, 2 reviewers, disagreement SD = 30):
 #+ATTR_LATEX: :width 0.8\textwidth :placement [htbp]
 [[file:figures/strategy-comparison.pdf]]
 
-The "two very good" strategy yields 46% higher expected publications than
-"one excellent," despite producing lower-quality work. Stochastic acceptance
-rewards multiple attempts: even if each individual paper has lower
-acceptance probability, the portfolio effect of multiple submissions
-increases expected output.
+The "two very good" strategy yields 46% more expected publications than
+"one excellent," despite producing lower-quality work. When acceptance is
+uncertain, multiple attempts beat a single bet. The researcher who writes
+two very good papers and the researcher who writes one excellent paper
+invest the same effort. The first publishes more.
 
 *** Does the Diversified Portfolio Strategy Work?
 
@@ -847,27 +822,27 @@ below-threshold quality levels.
 | Sixteen scattered   |     16 |      35 |      0.3% |    0.04 | Below         |
 
 The pure diversification strategy fails at low quality. Acceptance
-probability drops faster than paper count increases. Sixteen papers at
-quality 35 yield only 0.04 expected publications, far below one excellent
-paper (0.68).
+probability falls faster than paper count rises. Sixteen papers at quality
+35 yield only 0.04 expected publications, far below one excellent paper
+(0.68).
 
-But /slightly/ below-threshold papers can compete with excellent ones. Four
-papers at quality 65 (five points below threshold) yield 0.66 expected
-publications---comparable to one excellent paper at quality 90 (0.68). The
-portfolio strategy /does/ work near threshold: spreading effort across
-multiple papers hedges against the uncontrollable outcomes that
-disagreement produces. The tradeoff is investing less in each paper.
+However, slightly below-threshold papers can compete with excellent ones.
+Four papers at quality 65 (five points below threshold) yield 0.66 expected
+publications, comparable to one excellent paper at quality 90 (0.68). The
+portfolio strategy therefore works near the threshold by hedging against
+reviewer disagreement, at the cost of lower quality per paper.
 
-The optimal strategy remains firmly above threshold: "two very good" papers
-at quality 80 dominate all alternatives by a wide margin (0.92 expected
-publications). The key insight is that researchers should aim for the
-/lowest quality that reliably clears the threshold/, not the highest quality
-possible. Excess quality above threshold provides diminishing returns.
+The optimal strategy remains above threshold: "two very good" papers at
+quality 80 dominate all alternatives (0.92 expected publications). The
+implication is that researchers are incentivized to target the lowest
+quality that reliably clears the threshold rather than the highest possible
+quality, because marginal quality above the threshold yields diminishing
+returns.
 
 *** Implications for Researcher Behavior
 
-If researchers respond rationally to these incentives---and there is every
-reason to think they do---this helps explain several observed phenomena:
+If researchers respond to these incentives, the pattern is consistent with
+several observed phenomena:
 - The prevalence of "salami-slicing" (fragmenting research into minimal
   publishable units)
 - Field wisdom to "write twice as many papers as you think you need"
@@ -884,8 +859,8 @@ co-authorship, or multi-period optimization. The strategy comparison is
 quantity choices---not predictions about actual behavior. A full equilibrium
 model would require additional assumptions beyond this paper's scope.
 
-That said, the incentive gradients are consistent with observed behavior and
-with cite:azoulayDoesPeerReview2025, who provide evidence that peer review
+The incentive gradients are consistent with observed behavior and with
+cite:azoulayDoesPeerReview2025, who provide evidence that peer review
 penalizes researchers who pursue bold, unconventional work. If innovative
 research faces higher variance in reviewer assessments---less consensus on
 what "good" looks like---the AND-gate effect is amplified, making
@@ -953,9 +928,10 @@ reviewers improves accuracy by 7.8 percentage points. At high disagreement
 (SD = 35), the same change improves accuracy by 8.6 percentage points.
 
 The implication for fields with particularly subjective evaluation criteria
-is direct: if accounting reviews involve more subjectivity than, say,
-statistical analysis in finance, then accounting journals benefit /more/
-from additional reviewers than journals in more objective fields.
+is that additional reviewers provide relatively greater benefits. If
+accounting reviews involve more subjectivity than, say, statistical analysis
+in finance, then accounting journals benefit more from adding reviewers than
+journals in more objective fields.
 
 ** Interaction: Reviewers Help More With Multi-Dimensional Evaluation
 
@@ -975,12 +951,12 @@ from additional reviewers than journals in more objective fields.
 |         4D |         3 |    92.0% | 64.6%  |  4.1% |
 |         4D |         5 |    92.9% | 56.6%  |  3.7% |
 
-Additional reviewers also provide greater benefit when papers are evaluated
-on more dimensions. With 2-dimensional evaluation, going from 1 to 5
+Additional reviewers provide larger benefits when evaluation is
+multi-dimensional. With 2-dimensional evaluation, moving from 1 to 5
 reviewers reduces FNR by 18.3 percentage points. With 4-dimensional
 evaluation, the same change reduces FNR by 21.7 percentage points. Journals
-with comprehensive, multi-criteria evaluation need more reviewers to
-compensate for the AND-gate effect.
+using comprehensive, multi-criteria evaluation therefore require more
+reviewers to offset the AND-gate effect.
 
 ** Supplemental Analysis: The Editor's Role
 
@@ -997,34 +973,34 @@ compensate for the AND-gate effect.
 | Editor-as-reviewer |         3 |        60 | 43.5%  |    78.5% |
 | Main model         |         3 |       n/a | 40.2%  |    79.7% |
 
-In supplemental analysis, I examine whether editors should contribute their
-own quality assessments to the reviewer average, modeling the editor as an
-additional reviewer with higher disagreement (SD = 50-60) reflecting
-shallower engagement with any single paper.
+In supplemental analysis, I model the editor as an additional reviewer with
+higher disagreement (SD = 50--60), reflecting shallower engagement with any
+single paper.
 
-The result is counterintuitive: adding the editor's assessment /reduces/
-decision quality. With 2 reviewers alone, accuracy is 77.7%. Adding an
-editor with SD = 60 drops it to 76.1%. Averaging in a less reliable
-assessment dilutes the more reliable reviewer assessments.
+Adding the editor's assessment reduces decision quality. With two reviewers,
+accuracy is 77.7%; adding an editor with SD = 60 lowers accuracy to 76.1%.
+Averaging in a less reliable assessment dilutes the more reliable reviewer
+signals.
 
-The implication is clear: editors should aggregate and interpret reviewer
-assessments, not add their own subjective judgment to the average.
+Editors add value by /interpreting/ reviewer assessments, not by
+contributing another noisy signal to the average.
 
 ** Implications
 
 *** For Editors and Journals
 
-Several directions follow for editors seeking to improve decision quality.
+These results suggest several directions for editors seeking to improve
+decision quality.
 
 *Reviewer quantity and diversity.* The largest accuracy gains come from going
 from 1 to 2 reviewers, but meaningful improvements continue through 3-5
 reviewers. If accounting journals typically use 1-2 reviewers, there is
-accuracy left on the table. However, my correlated-errors analysis (Section
-[[#robustness]]) suggests that reviewer /diversity/ may matter more than
-reviewer /quantity/. Adding a third reviewer from the same methodological
-tradition as the first two provides less benefit than adding a reviewer with
-different training. Editors might prioritize assembling methodologically
-diverse review teams over simply increasing reviewer counts.
+accuracy left on the table. However, the correlated-errors analysis (Section [[#robustness]]) indicates
+that reviewer /diversity/ may matter more than reviewer /quantity/. Adding a
+third reviewer from the same methodological tradition provides less benefit
+than adding a reviewer with different training. Editors might therefore
+prioritize methodologically diverse review teams rather than simply adding
+reviewers.
 
 *Decision rule architecture.* Comprehensive rubrics with many evaluation
 criteria /reduce/ decision quality by creating more opportunities for
@@ -1040,8 +1016,8 @@ decisions for borderline-good papers are determined by reviewer disagreement
 rather than true quality. Journals could acknowledge this in rejection
 letters, distinguishing between "clear reject" (paper unlikely to succeed
 anywhere) and "unlucky reject" (paper might well have been accepted with
-different reviewers). This transparency would reduce author frustration and
-encourage appropriate resubmission behavior.
+different reviewers). This transparency could reduce author frustration and encourage appropriate
+resubmission behavior.
 
 *Structural alternatives.* Given that training doesn't improve agreement,
 journals might explore structural changes. Registered reports separate
@@ -1062,56 +1038,43 @@ improvement is difficult.
 Several of these implications are counterintuitive. Why do common-sense
 approaches to improving peer review backfire?
 
-/More detailed rubrics do not help./ Clearer criteria should improve
-agreement, right? No. Each additional criterion is another dimension on
-which reviewers can disagree. AND-gating turns comprehensive evaluation
-into a liability.
+/More detailed rubrics do not help./ Each additional criterion is another
+dimension on which reviewers can disagree. AND-gating turns comprehensive
+evaluation into a liability.
 
-/Adding reviewers has sharply diminishing returns./ More opinions should
-converge on truth, right? Only at $1/\sqrt{n}$. Going from 2 to 10 reviewers
-improves accuracy by about 9 percentage points---often not worth the cost.
+/Adding reviewers has sharply diminishing returns./ Under averaging,
+agreement improves at $1/\sqrt{n}$. Going from 2 to 10 reviewers improves
+accuracy by about 9 percentage points, often at high cost.
 
-/Reviewer training does not improve agreement./ Better training should
-produce better reviews, right? Low agreement reflects lack of consensus
-about quality, not reviewer incompetence
-(cite:hesselbergReviewerTrainingImproving2023). You cannot train people to
-agree when there is no ground truth to agree on.
+/Reviewer training does not improve agreement./ Low agreement reflects lack
+of consensus about quality, not reviewer incompetence
+(cite:hesselbergReviewerTrainingImproving2023).
 
-/Transparency does not automatically improve outcomes./ Open review or
-published referee reports should discipline reviewers, right? The problem is
-disagreement, not effort. Reviewers who try harder still disagree.
+/Transparency does not automatically improve outcomes./ The central issue
+is disagreement, not effort. Reviewers who try harder still disagree.
 
-These failures share a common root: they assume peer review is a solvable
-measurement problem---that there exists a "correct" assessment reviewers
-could converge on with better tools or more effort. Once we accept that
-reviewers genuinely disagree about what constitutes quality, attention
-shifts from "fixing reviewers" to designing systems that are robust to
-disagreement.
+These failures share a common root: they treat peer review as a solvable
+measurement problem. Once we accept that reviewers genuinely disagree about
+what constitutes quality, attention shifts from "fixing reviewers" to
+designing systems that are robust to disagreement.
 
 *** For Researchers
 
-*Calibrating expectations.* The field wisdom that good papers have roughly
-50-50 odds at top journals is not cynicism. It is arithmetic. Researchers
-should calibrate expectations accordingly, treating rejection as a signal
-of reviewer disagreement rather than a definitive quality judgment. A
-rejection from one journal provides limited information about likely success
-at another with different reviewers.
+The field wisdom that good papers have roughly 50-50 odds at top journals
+is consistent with this model. Rejection is a noisy signal. A rejection
+from one journal provides limited information about likely success at
+another with different reviewers.
 
-*Resubmission persistence.* Given high false negative rates, persistence in
-resubmission is rational. A paper rejected due to disagreement at one
-journal may succeed at another with different reviewers.
-cite:neffPeerReviewGame2006 showed that resubmission strategies
-significantly boost publication chances. However, this creates its own
-inefficiencies: reviewer effort is duplicated, and persistence rather than
+Persistence in resubmission is therefore rational.
+cite:neffPeerReviewGame2006 show that resubmission strategies can
+significantly boost publication chances. But this creates its own
+inefficiency: reviewer effort is duplicated, and persistence rather than
 quality becomes a determinant of publication.
 
-*Interpreting feedback.* Researchers should weight reviewer feedback by
-considering the degree of agreement among reviewers. Detailed, specific
-critiques likely contain signal; vague objections to "contribution" or
-"interest" may reflect taste differences rather than fundamental problems.
-The appropriate response to rejection depends on whether the feedback
-identifies fixable issues or merely reveals that this particular set of
-reviewers was unpersuaded.
+When interpreting feedback, the degree of agreement among reviewers
+matters. Detailed, specific critiques are more likely to contain signal.
+Vague objections to "contribution" or "interest" may reflect taste
+differences rather than fundamental problems.
 
 *** For the Profession
 
@@ -1119,7 +1082,7 @@ Beyond individual journals and researchers, these findings raise broader
 concerns about knowledge production in accounting.
 
 *Talent allocation.* High false rejection rates impose costs beyond
-frustration. Talented researchers who experience repeated rejection exit
+frustration. Talented researchers who experience repeated rejection may exit
 academia or redirect effort toward consulting, teaching, or administration.
 If rejection is partly driven by disagreement, some of those who exit are
 high-quality researchers who drew unsympathetic reviewers. The profession
@@ -1134,10 +1097,10 @@ plagued by disagreement fails directly: good ideas are rejected, resources
 are wasted on duplicated review effort, and incremental work crowds out
 innovation.
 
-*Collective action problems.* Individual journals face little incentive to
+*Collective action problems.* Individual journals face limited incentive to
 invest in agreement improvements. Adding reviewers is costly. Measuring
 agreement is effort-intensive. Journals compete on prestige, not decision
-accuracy. Improving the system requires coordinated action---from
+accuracy. Improving the system therefore requires coordinated action---from
 professional associations, from funders who could require agreement
 reporting, or from researchers who could collectively demand better
 processes.
@@ -1146,7 +1109,7 @@ processes.
 open review (where reviews are published), post-publication review (where
 filtering happens after publication), preprint servers (which separate
 dissemination from certification), and overlay journals (which curate rather
-than gatekeep). Accounting has been conservative in adopting any of these.
+than gatekeep). Accounting has been conservative in adopting these models.
 The costs of the traditional model are higher than commonly recognized. The
 field should be experimenting.
 
@@ -1182,9 +1145,9 @@ values.
 
 FNR ranges from 35.5% (ICC = 0.50) to 52.1% (ICC = 0.20). Even at the
 most optimistic agreement level, more than one-third of deserving papers
-are rejected. At lower agreement levels---which likely characterize
-evaluations of innovative or cross-disciplinary work---the majority of
-deserving papers face rejection.
+are rejected. At lower agreement levels---which may characterize
+evaluations of innovative or cross-disciplinary work---a large share of
+deserving papers are rejected.
 
 This range brackets accounting-specific scenarios. If accounting reviews
 involve less consensus than the cross-disciplinary average (competing
@@ -1193,11 +1156,10 @@ methodological traditions suggest they might), effective ICC falls below
 fields, ICC might be higher. The qualitative conclusions---substantial false
 rejection and perverse incentives---hold throughout this range.
 
-This table also supports the clustering strategy argument. Higher ICC
-corresponds to lower disagreement, which corresponds to lower FNR. A
-researcher who works in areas where reviewers agree more---established
-methodologies, incremental extensions---effectively operates in the higher
-ICC rows. The incentive to cluster is written directly in this table.
+This table is also consistent with the clustering argument. Higher ICC
+corresponds to lower disagreement and lower FNR. Researchers who work in
+areas where reviewers agree more---established methodologies or incremental
+extensions---operate in the higher ICC rows.
 
 ** Aggregation Method: Mean vs. Median
 
@@ -1215,12 +1177,12 @@ alternative is median aggregation, which is more robust to outlier reviewers.
 |         5 | Median |    80.7% | 37.5%  |
 
 Mean aggregation slightly outperforms median across reviewer counts. With 5
-reviewers, mean achieves 82.8% accuracy versus 80.7% for median---a difference
-of 2.1 percentage points. This occurs because my model assumes normally
+reviewers, mean achieves 82.8% accuracy versus 80.7% for median, a difference
+of 2.1 percentage points. This occurs because the model assumes normally
 distributed noise without outliers, where averaging is statistically optimal.
-In practice, if some reviewers provide "adversarial" reviews (extremely
-negative assessments unrelated to quality), median aggregation could
-outperform; my model does not capture this phenomenon.
+If some reviewers provide "adversarial" reviews (extremely negative
+assessments unrelated to quality), median aggregation could outperform; the
+model does not capture this case.
 
 ** Correlated Reviewer Errors
 
@@ -1258,31 +1220,27 @@ multiple reviewers.
 |        0.75 |         3 |    75.5% | 49.7%  |
 |        0.75 |         5 |    75.5% | 49.7%  |
 
-Correlated errors eliminate the benefit of additional reviewers. At $\rho =
-0$ (independent errors), going from 2 to 5 reviewers improves accuracy from
-77.9% to 83.4%---a gain of 5.5 percentage points. At $\rho = 0.75$ (highly
-correlated errors), the same change yields essentially nothing (75.2% to
-75.5%).
+Correlated errors substantially reduce the benefit of additional reviewers.
+At $\rho = 0$ (independent errors), going from 2 to 5 reviewers improves
+accuracy from 77.9% to 83.4%, a gain of 5.5 percentage points. At
+$\rho = 0.75$ (highly correlated errors), the same change yields essentially
+no improvement (75.2% to 75.5%).
 
-Correlated errors do not average out. If all reviewers share a
-methodological worldview that disadvantages certain research approaches,
-adding more reviewers from the same pool merely confirms the shared bias.
+If reviewers share a methodological worldview that disadvantages certain
+research approaches, adding more reviewers from the same pool is unlikely to
+improve accuracy.
 
-But the empirical evidence suggests that the independent-errors
-baseline---genuine disagreement---is the empirically relevant case.
-As discussed in the introduction, correlated biases (high $\rho$) would
-produce quick, consistent decisions. Instead, we observe long publication
-times, multiple revision rounds to satisfy divergent demands, and papers
-rejected at one journal accepted at another with different reviewers. These
-patterns are consistent with independent errors: reviewers genuinely
-disagree about what makes a paper good.
+The independent-errors baseline remains empirically relevant. As discussed
+in the introduction, correlated biases (high $\rho$) would produce quick,
+consistent decisions. Instead, we observe long publication times, multiple
+revision rounds, and papers rejected at one journal accepted at another with
+different reviewers. These patterns are consistent with independent errors.
 
-The correlated-errors analysis should therefore be interpreted as a
-/counterfactual/: what would happen if reviewers /did/ agree? Adding
-reviewers would provide little benefit---but decisions would be faster and
-more consistent. The fact that we observe slow, inconsistent decisions
-suggests the independent-errors baseline is the empirically relevant case.
-My main results are grounded in observed reviewer behavior.
+Accordingly, the correlated-errors analysis is best interpreted as a
+/counterfactual/: what would happen if reviewers agreed. Under such
+conditions, adding reviewers would provide little benefit but decisions
+would be faster and more consistent. The main results are grounded in the
+independent-errors case.
 
 ** Sensitivity to Quality Variance
 
@@ -1306,11 +1264,11 @@ is most likely to cause misclassification. Second, at fixed ICC, lower
 $\tau$ implies lower $\sigma$ (less absolute disagreement), but the relative
 disagreement compared to quality differences remains constant.
 
-The implication: if accounting submissions exhibit relatively homogeneous
-quality---most papers from qualified researchers meeting professional
-standards---the effective false rejection rate is higher than my baseline
-estimate. If quality is highly variable, discrimination is easier than my
-model suggests.
+The implication is that if accounting submissions exhibit relatively
+homogeneous quality---most papers from qualified researchers meeting
+professional standards---the effective false rejection rate is higher than
+my baseline estimate. If quality is highly variable, discrimination is
+easier than the model suggests.
 
 ** Theoretical Considerations: Non-Normal Distributions
 
@@ -1319,18 +1277,17 @@ disagreement. Empirical quality distributions may differ: true quality might
 be right-skewed (most papers are mediocre, few are excellent) or
 heavy-tailed (occasional breakthrough papers).
 
-I do not simulate alternative distributions, but can reason about their
-effects. Right-skewed quality distributions would place more papers near the
-left tail, where disagreement is more likely to cause false /positives/ than
+I do not simulate alternative distributions, but their likely effects are
+clear. Right-skewed quality distributions place more papers near the left
+tail, where disagreement is more likely to generate false /positives/ than
 false negatives. This could mitigate FNR concerns for the typical paper
 while exacerbating FPR concerns. Heavy-tailed disagreement distributions
 (e.g., occasional highly discordant reviewers) would reduce the
-effectiveness of averaging and potentially favor median aggregation.
+effectiveness of averaging and could favor median aggregation.
 
-The key insight is that my baseline estimates assume symmetric, well-behaved
-distributions. Departures from normality could either amplify or attenuate
-specific effects, but the fundamental tension between selectivity and
-agreement remains.
+The baseline estimates assume symmetric, well-behaved distributions.
+Departures from normality could amplify or attenuate specific effects, but
+the fundamental tension between selectivity and agreement remains.
 
 ** Summary of Robustness Findings
 
@@ -1370,9 +1327,9 @@ Across sensitivity analyses, several findings are robust:
    stochastic acceptance, which is present regardless of specific parameter
    values.
 
-The qualitative story is robust. The quantitative estimates depend on
-parameters that are imperfectly known. Both of these statements should
-inform how readers interpret the results.
+The qualitative conclusions are robust. The quantitative estimates depend
+on parameters that are imperfectly known, and should be interpreted
+accordingly.
 
 * Limitations
 :PROPERTIES:
@@ -1385,7 +1342,7 @@ correlated biases. Dimensions are independent; in reality, true quality may
 be correlated across dimensions. Aggregation is by simple averaging; in
 reality, editors may weight reviewers differently.
 
-These simplifications likely make my estimates /conservative/. Correlated
+These simplifications likely make the estimates /conservative/. Correlated
 reviewer biases would not average out as effectively. Positive dimension
 correlation would /reduce/ the AND-gate effect (a paper strong on one
 dimension is likely strong on others), attenuating false rejection rates.
@@ -1398,13 +1355,12 @@ could extend the simulation to capture these dynamics.
 
 Finally, I model the editor as mechanically applying a conjunctive threshold,
 but real editors exercise discretion. An experienced editor may override a
-split decision, weigh one reviewer's expertise more heavily, or recognize when
-a negative review reflects taste rather than quality. Such discretion could
-partially mitigate the AND-gate effect if editors systematically correct for
-disagreement. However, editorial discretion could also introduce new biases,
-and the fundamental problem remains: editors must still interpret divergent
-reviewer assessments. The net effect of discretion is an empirical question
-that my simulation does not address.
+split decision, weigh one reviewer's expertise more heavily, or recognize
+when a negative review reflects taste rather than quality. Such discretion
+could partially mitigate the AND-gate effect if editors systematically
+correct for disagreement. However, discretion could also introduce new
+biases. The net effect is an empirical question that the simulation does
+not address.
 
 * Conclusion
 :PROPERTIES:
@@ -1416,27 +1372,23 @@ bias---drives outcomes, and use simulation to examine the consequences.
 Calibrating to empirical inter-rater agreement data (ICC = 0.34), I find
 that approximately 45% of deserving papers are rejected due to reviewer
 disagreement alone. Low agreement, multi-dimensional evaluation, and high
-selectivity combine to create a system that systematically rejects good
-work---not because reviewers are biased or incompetent, but because there
-is no shared definition of what "good" means.
+selectivity combine to produce a system with high false rejection rates.
 
-This reframes how to interpret and reform the publication process. The
-problem is not bad reviewers. It is structural disagreement operating
-through a decision architecture that amplifies its effects. Recognizing this
-shifts attention from reviewer training (which does not work because the
-problem is not competence) to structural interventions: fewer evaluation
-dimensions, compensatory decision rules, reviewer diversity, and explicit
-acknowledgment of uncertainty.
+The problem is not biased reviewers. It is structural disagreement
+operating through a decision architecture that amplifies its effects.
+Training does not work because the problem is not competence. Detailed
+rubrics do not work because they add dimensions on which reviewers
+disagree. What works: fewer evaluation dimensions, compensatory decision
+rules, reviewer diversity, and explicit acknowledgment of uncertainty.
 
-Disagreement also creates perverse incentives. Researchers maximize expected
-publications by producing multiple moderate-quality papers rather than
-single excellent papers---"two very good" dominates "one excellent" by 46%
-in expected output. Methodological conformity emerges as a rational defense:
-clustering near established approaches reduces the scope for disagreement
-and lowers rejection risk. This helps explain the prevalence of incremental
-research, the research-practice gap, and the methodological narrowing
-documented in the literature. Observed research practices are rational
-responses to structural incentives, not failures of scholarly values.
+Disagreement creates incentives toward quantity over quality. Researchers
+maximize expected publications by producing multiple moderate-quality papers
+rather than a single excellent paper; "two very good" dominates "one
+excellent" by 46% in expected output. Methodological conformity also becomes
+a rational defense, because clustering near established approaches reduces
+the scope for disagreement and lowers rejection risk. These incentives are
+consistent with the prevalence of incremental research, the research-practice
+gap, and methodological narrowing documented in the literature.
 
 ** Future Research Directions
 
@@ -1476,58 +1428,45 @@ rather than just immediate acceptance decisions.
 
 ** Broader Implications
 
-My analysis speaks to concerns beyond accounting. Peer review is the
-primary quality filter for scholarly knowledge across disciplines, yet
-reviewer agreement is consistently low. If the problems I document are
-general---and the cross-disciplinary consistency of ICC estimates suggests
-they are---then scholarly communication systems worldwide are systematically
-rejecting good work and rewarding conformity over innovation.
+These mechanisms are not specific to accounting. Peer review is the
+primary quality filter for scholarly knowledge across disciplines, and
+reviewer agreement is consistently low. The same dynamics---high false
+rejection, perverse incentives, convergence to mediocrity---operate
+wherever reviewers disagree and decisions are conjunctive.
 
-The downstream consequences are serious. Funders, universities, and
+The downstream consequences compound. Funders, universities, and
 governments rely on publication records to allocate resources, grant tenure,
 and assess research impact. If publication outcomes are substantially driven
-by reviewer disagreement, these downstream decisions inherit that
-arbitrariness. A researcher denied tenure due to insufficient publications
-may have drawn unsympathetic reviewers. A field that appears unproductive
-may face review standards that discourage the bold work it needs.
-Disagreement-driven signals used for high-stakes decisions amplify the costs
-of low agreement.
+by reviewer disagreement, those downstream decisions inherit the
+arbitrariness.
 
-More fundamentally: is peer review---in its current form---the right
-institution for filtering scholarly knowledge? Peer review emerged in an
-era of scarce publication capacity, when physical journals had page limits
-and printing costs. In the digital era, these constraints have relaxed, yet
-we retain pre-digital filtering mechanisms. Post-publication review, open
-access archives, and algorithmic curation offer alternatives that might
-better balance quality control against the costs of false rejection.
-
-I do not advocate abandoning peer review, which provides valuable functions
-beyond filtering: feedback improves papers, review trains scholars in
-critical evaluation, and the process builds scholarly community. But the
-costs of traditional peer review are higher than commonly acknowledged, and
-experimentation with alternatives deserves serious consideration.
+Peer review emerged in an era of scarce publication capacity. In the
+digital era, those constraints have relaxed, yet pre-digital filtering
+mechanisms remain. Post-publication review, open access archives, and
+algorithmic curation offer alternatives that may better balance quality
+control against the costs of false rejection. I do not advocate abandoning
+peer review, which provides valuable functions beyond filtering, but these
+results suggest that experimentation with alternatives deserves serious
+consideration.
 
 ** Closing Thoughts
 
 The frustration documented by cite:burtonPerceptionsAccountingAcademics2024
-is real. Accounting researchers believe the publication process is broken,
-that good work is rejected while narrow work succeeds, and that the system
-rewards the wrong behaviors. These perceptions are not paranoia. They
-reflect accurate intuitions about the structural consequences of reviewer
-disagreement.
+is well documented. Accounting researchers report that the publication
+process rejects good work, favors narrow approaches, and rewards the wrong
+behaviors. These perceptions are consistent with the structural consequences
+of reviewer disagreement.
 
-But attributing dysfunction primarily to bias misdirects reform efforts.
+Attributing dysfunction primarily to bias can misdirect reform efforts.
 Bias is addressable through training, diversification, and vigilance.
-Disagreement is addressable only through structural change---redesigning
-the decision architecture so that divergent reviewer assessments do not
-mechanically determine outcomes. If the profession spends its reform energy
-on bias while the real problem is disagreement, efforts fail and the
-profession concludes---incorrectly---that the problem is intractable.
+Disagreement requires structural change---redesigning the decision
+architecture so that divergent reviewer assessments do not mechanically
+determine outcomes. If reforms focus on bias while disagreement drives
+outcomes, improvements will be limited.
 
-If accounting research is to matter---to practitioners, policymakers, and
-the public---the field needs publication systems that reliably identify and
-disseminate good work. Currently, we do not have such systems. Building them
-is among the most important challenges facing the profession.
+For accounting research to matter to practitioners, policymakers, and the
+public, publication systems must more reliably identify and disseminate good
+work. Building such systems is an important challenge for the profession.
 
 * References
 :PROPERTIES:
