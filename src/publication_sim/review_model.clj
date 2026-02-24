@@ -280,7 +280,9 @@
   "Experiment 3: Effect of evaluation dimensions (AND-gating)."
   [& {:keys [num-runs]
       :or {num-runs 10}}]
-  (let [dim-configs [{:dimensions [:interest :rigor]
+  (let [dim-configs [{:dimensions [:interest]
+                      :label "1 dimension"}
+                     {:dimensions [:interest :rigor]
                       :label "2 dimensions"}
                      {:dimensions [:interest :rigor :contribution]
                       :label "3 dimensions"}
