@@ -37,9 +37,9 @@ maximize expected publications by producing multiple moderate-quality papers
 rather than single excellent papers, and methodological conformity emerges as
 a rational defense against subjectivity---clustering near established
 approaches reduces the scope for disagreement. These patterns are
-consistent with a structural mechanism: reviewers disagree because there is
-no shared definition of what "good" means, and that distinction points
-toward different remedies. 
+consistent with a structural mechanism in which reviewers disagree because
+there is no shared definition of what "good" means, which points toward
+different remedies. 
 
 * Introduction
 
@@ -273,7 +273,7 @@ work---work that crosses traditional disciplinary boundaries and addresses
 messy real-world problems---then rational researchers avoid it. Clustering
 near established approaches, where evaluation criteria are better defined
 and reviewer consensus is higher, becomes a survival strategy. Safe work
-gets published. Useful work does not. The research-practice gap is a
+gets published. More ambitious work does not. The research-practice gap is a
 predictable consequence of a system where subjectivity governs evaluation.
 
 ** Doctoral Socialization and Methodological Narrowing
@@ -616,8 +616,8 @@ total quality across all papers---i.e., how well the review process
 preserves the rank ordering of manuscripts.
 
 With two reviewers---the accounting norm---nearly half of deserving papers
-are rejected (FNR = 0.45). Not because they are bad. Because reviewers
-disagree.
+are rejected (FNR = 0.45). These rejections occur even when true quality is
+above threshold, consistent with reviewer disagreement.
 
 The gains from additional reviewers are real but diminishing. Going from
 one to two reviewers reduces FNR by 6.9 percentage points---the largest
@@ -634,7 +634,7 @@ The single-reviewer case deserves particular attention. JAR and JAE
 frequently use one reviewer. With a single reviewer, FNR rises to 52%---more
 than half of deserving papers rejected on one person's subjective
 assessment. Adding a second reviewer is the largest marginal gain in the
-table. Yet these journals have chosen speed over accuracy.
+table. This choice prioritizes speed, with measurable costs to accuracy.
 
 ** The AND-Gate Effect: Dimensions Amplify Errors
 
@@ -1383,9 +1383,9 @@ rules, reviewer diversity, and explicit acknowledgment of uncertainty.
 
 Disagreement creates incentives toward quantity over quality. Researchers
 maximize expected publications by producing multiple moderate-quality papers
-rather than a single excellent paper; "two very good" dominates "one
-excellent" by 46% in expected output. Methodological conformity also becomes
-a rational defense, because clustering near established approaches reduces
+than a single excellent paper; "two very good" dominates "one
+excellent" by 46% in expected output. Methodological conformity can be
+interpreted as a rational response, because clustering near established approaches reduces
 the scope for disagreement and lowers rejection risk. These incentives are
 consistent with the prevalence of incremental research, the research-practice
 gap, and methodological narrowing documented in the literature.
